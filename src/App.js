@@ -4,6 +4,7 @@ import Header from './components/Header'
 import { connect } from 'react-redux'
 import { fetchBookingsAction } from './redux/actions'
 import DispatchGrid from './containers/DispatchGrid';
+import Login from './components/Login'
 
 
 class App extends React.Component {
@@ -34,6 +35,7 @@ class App extends React.Component {
     console.log(this.props)
     return (
       <>
+      <Login />
       <Header dayChangeHandler={this.dayChangeHandler}/>
       <DispatchGrid dayChange={this.state.currentDate}/>
   

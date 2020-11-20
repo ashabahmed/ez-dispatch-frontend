@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import BookingRow from '../components/BookingRow'
-import { fetchDriversAction } from '../redux/actions'
+import { fetchDriversAction, fetchDispatchersAction } from '../redux/actions'
 
 class DispatchGrid extends React.Component {
 
@@ -10,7 +10,8 @@ class DispatchGrid extends React.Component {
   }
   
   componentDidMount(){
-    this.props.getState()
+    this.props.getDrivers()
+    this.props.getDispatchers()
     this.setState({ todaysBookings: this.todaysBookings() })
   }
   
@@ -66,13 +67,17 @@ class DispatchGrid extends React.Component {
 
 
 function mapDispatchToProps(dispatch) {
-  return { getState: () => dispatch(fetchDriversAction()) }
+  return { 
+    getDrivers: () => dispatch(fetchDriversAction()),
+    getDispatchers: () => dispatch(fetchDispatchersAction())
+  }
 }
 
 function mapStateToProps(state){
   return {
     bookings: state.bookings,
-    drivers: state.drivers
+    drivers: state.drivers,
+    dispatchers: state.dispatchers
   }
 }
 
