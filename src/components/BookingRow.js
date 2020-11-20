@@ -22,6 +22,9 @@ const BookingRow = (props) => {
         <td>
           <span>{props.booking.trip_status}</span>
         </td>
+        <td>
+          <span>{props.booking.pick_up_time}</span>
+        </td>
         
       </tr>
   )

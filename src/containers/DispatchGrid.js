@@ -28,11 +28,11 @@ class DispatchGrid extends React.Component {
   // }
   
   renderBookings = () => {
-    return this.todaysBookings(this.props.dayChange).map((booking) => <BookingRow key={booking.id} booking={booking}/>)
+    return this.todaysBookings(this.props.currentDate).map((booking) => <BookingRow key={booking.id} booking={booking}/>)
   }
   
   render(){
-    console.log(this.props)
+    console.log(this.props, "DISPATCHGRID")
     return(
       <div>
         <table>
@@ -55,6 +55,9 @@ class DispatchGrid extends React.Component {
             </th>
             <th>
               Status
+            </th>
+            <th>
+              Pick-up Time
             </th>
           </tr>
           </thead>

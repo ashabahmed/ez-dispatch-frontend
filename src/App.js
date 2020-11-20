@@ -3,14 +3,15 @@ import React from 'react';
 import Header from './components/Header'
 import { connect } from 'react-redux'
 import { fetchBookingsAction } from './redux/actions'
-import DispatchGrid from './containers/DispatchGrid';
-import Login from './components/Login'
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"
 
+import Login from './components/Login'
+import AddBookingForm from './components/AddBookingForm'
 
 class App extends React.Component {
   
   state = {
-    currentDate: (new Date())
+    currentDate: new Date()
   }
 
   componentDidMount() {
@@ -22,23 +23,27 @@ class App extends React.Component {
   }
 
   dayChangeHandler = (dayNumber) => {
-    if(dayNumber === 1 || -1){
+    console.log(dayNumber)
+    if(dayNumber === 1 || dayNumber === -1) {
+      console.log("testest")
       this.setState({ currentDate: (new Date(this.state.currentDate.setDate(this.state.currentDate.getDate() + dayNumber ))) })
     } else {
-      // this.setState({ currentDate: (new Date())})
+      this.setState({ currentDate: new Date() })
     }
     
   }
 
 
   render () {
-    console.log(this.props)
     return (
       <>
-      <Login />
-      <Header dayChangeHandler={this.dayChangeHandler}/>
-      <DispatchGrid dayChange={this.state.currentDate}/>
-  
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' render={ routerProps =>  <Login routerProps={routerProps}/> } />
+          <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />
+          <Route path='/header' render={ routerProps =>  <Header dayChangeHandler={this.dayChangeHandler } currentDate={this.state.currentDate} routerProps={routerProps}/> } />
+        </Switch>
+      </BrowserRouter>
       </>
     );
   }

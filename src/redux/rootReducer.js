@@ -16,7 +16,7 @@ function bookingsReducer(state = defaultState.bookings, action) {
   }
 };
 
-function driversReducer(state = defaultState.bookings, action) {
+function driversReducer(state = defaultState.drivers, action) {
   switch (action.type) {
     case "GET_DRIVERS":
       return action.payload
@@ -25,7 +25,7 @@ function driversReducer(state = defaultState.bookings, action) {
   }
 };
 
-function dispatchersReducer(state = defaultState.bookings, action) {
+function dispatchersReducer(state = defaultState.dispatchers, action) {
   switch (action.type) {
     case "GET_DISPATCHERS":
       return action.payload
