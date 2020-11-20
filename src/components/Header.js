@@ -13,6 +13,7 @@ class Header extends React.Component {
         <h1 >CHANGE DAYS</h1>
         <button onClick={() => {this.handleClick(-1)}}>Previous Day</button>
         <button onClick={() => {this.handleClick(+1)}}>Next Day</button>
+        <button onClick={() => {this.handleClick("hello")}}>Today</button>
       </div>
     )
   }

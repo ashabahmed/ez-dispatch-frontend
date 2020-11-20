@@ -2,15 +2,14 @@ import './App.css';
 import React from 'react';
 import Header from './components/Header'
 import { connect } from 'react-redux'
-import { fetchAction } from './redux/actions'
+import { fetchBookingsAction } from './redux/actions'
 import DispatchGrid from './containers/DispatchGrid';
 
 
-
 class App extends React.Component {
-
+  
   state = {
-    currentDate: (new Date()) 
+    currentDate: (new Date())
   }
 
   componentDidMount() {
@@ -22,13 +21,17 @@ class App extends React.Component {
   }
 
   dayChangeHandler = (dayNumber) => {
-
-    this.setState({ currentDate: (new Date(this.state.currentDate.setDate(this.state.currentDate.getDate() + dayNumber ))) })
+    if(dayNumber === 1 || -1){
+      this.setState({ currentDate: (new Date(this.state.currentDate.setDate(this.state.currentDate.getDate() + dayNumber ))) })
+    } else {
+      // this.setState({ currentDate: (new Date())})
+    }
+    
   }
 
 
   render () {
-    console.log(this.state.currentDate)
+    console.log(this.props)
     return (
       <>
       <Header dayChangeHandler={this.dayChangeHandler}/>
@@ -40,8 +43,10 @@ class App extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { getState: () => dispatch(fetchAction()) }
+  return { getState: () => dispatch(fetchBookingsAction()) }
 }
+
+
 
 export default connect(null, mapDispatchToProps)(App)
 

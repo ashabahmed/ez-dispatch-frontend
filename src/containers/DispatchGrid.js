@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import BookingRow from '../components/BookingRow'
+import { fetchDriversAction } from '../redux/actions'
 
 class DispatchGrid extends React.Component {
 
   state = {
-    //change todaysbookings to currentBookings (var and method name)
     todaysBookings: [],
-    // currentDate: (new Date()) 
   }
   
   componentDidMount(){
+    this.props.getState()
     this.setState({ todaysBookings: this.todaysBookings() })
   }
   
@@ -31,7 +31,7 @@ class DispatchGrid extends React.Component {
   }
   
   render(){
-    console.log(this.props.dayChange)
+    console.log(this.props)
     return(
       <div>
         <table>
@@ -62,12 +62,20 @@ class DispatchGrid extends React.Component {
       </div>
     )
   }
+}
 
 
+function mapDispatchToProps(dispatch) {
+  return { getState: () => dispatch(fetchDriversAction()) }
 }
 
 function mapStateToProps(state){
-  return {bookings: state.bookings}
+  return {
+    bookings: state.bookings,
+    drivers: state.drivers
+  }
 }
 
-export default connect(mapStateToProps)(DispatchGrid)
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DispatchGrid)
