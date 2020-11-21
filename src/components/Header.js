@@ -14,6 +14,7 @@ class Header extends React.Component {
   }
 
   render(){
+    console.log(this.props.routerProps)
     return (
       <div>
         <div style={{textAlign: "center"}}>

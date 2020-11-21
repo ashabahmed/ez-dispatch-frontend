@@ -4,13 +4,15 @@ const defaultState = {
   bookings: [],
   drivers: [],
   dispatchers: [],
-  currentDate: (new Date()) 
+  dateFromReducer: (new Date()) 
 }
 
 function bookingsReducer(state = defaultState.bookings, action) {
   switch (action.type) {
     case "GET_BOOKINGS":
       return action.payload
+    case "ADD_BOOKING":
+        return [...state, action.payload];
     default:
       return state;
   }

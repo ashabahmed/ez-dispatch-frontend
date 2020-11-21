@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './components/Header'
 import { connect } from 'react-redux'
 import { fetchBookingsAction } from './redux/actions'
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 import Login from './components/Login'
 import AddBookingForm from './components/AddBookingForm'
@@ -39,9 +39,9 @@ class App extends React.Component {
       <>
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' render={ routerProps =>  <Login routerProps={routerProps}/> } />
           <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />
           <Route path='/header' render={ routerProps =>  <Header dayChangeHandler={this.dayChangeHandler } currentDate={this.state.currentDate} routerProps={routerProps}/> } />
+          <Route path='/' render={ routerProps =>  <Login routerProps={routerProps}/> } />
         </Switch>
       </BrowserRouter>
       </>

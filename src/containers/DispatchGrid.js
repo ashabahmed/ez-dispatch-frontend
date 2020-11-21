@@ -16,9 +16,10 @@ class DispatchGrid extends React.Component {
   }
   
   todaysBookings = (currentDate) => {
-    let newArray = [...this.props.bookings]
-    
-    let todaysBookings = newArray.filter((booking) => currentDate.toDateString() === (new Date(Date.parse(booking.date))).toDateString())
+
+    let todaysBookings = this.props.bookings.filter((booking) => {
+      return currentDate.toDateString() === (new Date(Date.parse(booking.date))).toDateString()
+    })
     return todaysBookings
   }
 
@@ -28,6 +29,7 @@ class DispatchGrid extends React.Component {
   // }
   
   renderBookings = () => {
+    console.log(this.props.currentDate, "INSIDE RENDER BOOKINGS")
     return this.todaysBookings(this.props.currentDate).map((booking) => <BookingRow key={booking.id} booking={booking}/>)
   }
   
@@ -80,7 +82,8 @@ function mapStateToProps(state){
   return {
     bookings: state.bookings,
     drivers: state.drivers,
-    dispatchers: state.dispatchers
+    dispatchers: state.dispatchers,
+    dateFromReducer: state.dateFromReducer
   }
 }
 

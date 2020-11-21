@@ -11,18 +11,18 @@ class Login extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.logIn(this.state, this.props.routerProps)
+  // handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   this.props.logIn(this.state, this.props.routerProps)
 
-    this.setState({
-      username: "",
-      password: ""
-    })
-  }
+  //   this.setState({
+  //     username: "",
+  //     password: ""
+  //   })
+  // }
 
-  clickHandler = (e) => {
-    e.preventDefault()
+  clickHandler = () => {
+    // e.preventDefault()
     this.props.routerProps.history.push('/header')
   }
 
@@ -36,7 +36,7 @@ class Login extends React.Component {
           <br/>
         <label className="password" >Password</label>
           <input value={this.state.password} name="password" type="password" placeholder="password" onChange={this.handleChange}></input>
-        <button onClick={this.clickHandler} type="submit">Login</button>
+        <button onClick={this.clickHandler} >Login</button>
       </form>
     </div>
     )

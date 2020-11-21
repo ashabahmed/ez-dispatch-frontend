@@ -29,6 +29,24 @@ export function fetchDispatchersAction() {
 };
 
 
+export function createNewBookingAction(newBookingObj) {
+  return function (dispatch) {
+    fetch('http://localhost:3000/bookings', {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(newBookingObj)
+    })
+      .then(resp => resp.json())
+      .then(payload => dispatch({ type: "ADD_BOOKING", payload }))
+      .catch(console.log)
+
+  };
+};
+
+
 export function dateAction() {
   return function (dispatch) {
     console.log("Inside dateAction")

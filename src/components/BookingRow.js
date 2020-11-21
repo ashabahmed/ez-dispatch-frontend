@@ -23,7 +23,7 @@ const BookingRow = (props) => {
           <span>{props.booking.trip_status}</span>
         </td>
         <td>
-          <span>{props.booking.pick_up_time}</span>
+          <span>{new Date(Date.parse(props.booking.pick_up_time)).toTimeString()}</span>
         </td>
         
       </tr>
