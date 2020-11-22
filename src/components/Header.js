@@ -9,12 +9,11 @@ class Header extends React.Component {
   }
 
   addBookingClick = () => {
-    console.log("is this working?")
     this.props.routerProps.history.push('/add-booking')
   }
 
   render(){
-    console.log(this.props.routerProps)
+    console.log(this.props)
     return (
       <div>
         <div style={{textAlign: "center"}}>
@@ -25,6 +24,8 @@ class Header extends React.Component {
           <button onClick={this.addBookingClick}className="createBooking">Add Booking</button>
           
         </div>
+        <div><h3 style={{textAlign: "center"}} >Today: {this.props.currentDate.toDateString()} </h3></div>
+        <hr/>
         <>
           <DispatchGrid currentDate={this.props.currentDate}/>
         </>

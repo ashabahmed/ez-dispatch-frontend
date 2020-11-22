@@ -23,14 +23,11 @@ class App extends React.Component {
   }
 
   dayChangeHandler = (dayNumber) => {
-    console.log(dayNumber)
     if(dayNumber === 1 || dayNumber === -1) {
-      console.log("testest")
-      this.setState({ currentDate: (new Date(this.state.currentDate.setDate(this.state.currentDate.getDate() + dayNumber ))) })
+      this.setState({ currentDate: (new Date(this.state.currentDate.setDate(this.state.currentDate.getDate() + dayNumber )))})
     } else {
       this.setState({ currentDate: new Date() })
     }
-    
   }
 
 

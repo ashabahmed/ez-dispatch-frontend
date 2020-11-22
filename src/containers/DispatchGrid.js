@@ -6,7 +6,7 @@ import { fetchDriversAction, fetchDispatchersAction } from '../redux/actions'
 class DispatchGrid extends React.Component {
 
   state = {
-    todaysBookings: [],
+    todaysBookings: []
   }
   
   componentDidMount(){
@@ -16,31 +16,27 @@ class DispatchGrid extends React.Component {
   }
   
   todaysBookings = (currentDate) => {
-
-    let todaysBookings = this.props.bookings.filter((booking) => {
-      return currentDate.toDateString() === (new Date(Date.parse(booking.date))).toDateString()
-    })
-    return todaysBookings
+    if(currentDate === undefined){
+      console.log(this.props)
+    } else {
+      let todaysBookings = this.props.bookings.filter((booking) => {
+        return currentDate.toDateString() === (new Date(Date.parse(booking.date))).toDateString()
+      })
+      return todaysBookings
+    }
   }
 
-  // changeDate = () => {
-    
-  //   this.setState({currentDate: this.state.currentDate.setDate(this.props.dayChange)})
-  // }
-  
   renderBookings = () => {
-    console.log(this.props.currentDate, "INSIDE RENDER BOOKINGS")
     return this.todaysBookings(this.props.currentDate).map((booking) => <BookingRow key={booking.id} booking={booking}/>)
   }
   
   render(){
-    console.log(this.props, "DISPATCHGRID")
     return(
       <div>
-        <table>
-          <thead>
+        <table style={{textAlign: "center"}}>
+          <thead style={{textAlign: "center"}}>
           <tr>
-            <th>
+            <th >
               Booking No.
             </th>
             <th>
@@ -53,13 +49,28 @@ class DispatchGrid extends React.Component {
               Account Name
             </th>
             <th>
-              Date
+              Scheduled Pick-up
             </th>
             <th>
               Status
             </th>
             <th>
+              Passengers
+            </th>
+            <th>
+              Driver
+            </th>
+            <th>
+              Pick-up Point
+            </th>
+            <th>
+              Drop-off Point
+            </th>
+            <th>
               Pick-up Time
+            </th>
+            <th>
+              Drop-off Time
             </th>
           </tr>
           </thead>
@@ -69,7 +80,6 @@ class DispatchGrid extends React.Component {
     )
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return { 
@@ -86,7 +96,5 @@ function mapStateToProps(state){
     dateFromReducer: state.dateFromReducer
   }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(DispatchGrid)

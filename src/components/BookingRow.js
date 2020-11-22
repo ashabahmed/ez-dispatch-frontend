@@ -2,34 +2,52 @@ import React from 'react'
 
 const BookingRow = (props) => {
   
+  const clickHandler = () => {
+    console.log(props.booking.id, "clicking booking")
+  }
+
+  
   return (
-      <tr>
-        <td>
-          <span>{props.booking.id}</span>
-        </td>
-        <td>
-          <span>{props.booking.vehicle ? props.booking.vehicle.vehicle_type : " "}</span>
-        </td>
-        <td>
-          <span>{props.booking.vehicle ? props.booking.vehicle.id : " "}</span>
-        </td>
-        <td>
-          <span>{props.booking.account ? props.booking.account.name : " "}</span>
-        </td>
-        <td>
-          <span>{new Date(Date.parse(props.booking.date)).toDateString()}</span>
-        </td>
-        <td>
-          <span>{props.booking.trip_status}</span>
-        </td>
-        <td>
-          <span>{new Date(Date.parse(props.booking.pick_up_time)).toTimeString()}</span>
-        </td>
-        
-      </tr>
+    <tr onClick={clickHandler}>
+      <td>
+        <span>{ props.booking.id }</span>
+      </td>
+      <td style={ {backgroundColor: "blue"} }>
+        <span>{ props.booking.vehicle ? props.booking.vehicle.vehicle_type : "-- --" }</span>
+      </td>
+      <td>
+        <span>{ props.booking.vehicle ? props.booking.vehicle.id : "-- --" }</span>
+      </td>
+      <td>
+        <span>{ props.booking.account ? props.booking.account.name : "-- --" }</span>
+      </td>
+      <td>
+        <span>{ props.booking.date ? new Date(Date.parse(props.booking.date)).toLocaleString() : "-- --" }</span>
+      </td>
+      <td>
+        <span>{ props.booking.trip_status }</span>
+      </td>
+      <td>
+        <span>{ props.booking.account.passengers === "" ? props.booking.account.name : props.booking.account.passengers }</span>
+      </td>
+      <td>
+        <span>{ props.booking.driver ? props.booking.driver.name : "-- --" }</span>
+      </td>
+      <td>
+        <span>{ props.booking.pick_up_address === "" ? "-- --"  : props.booking.pick_up_address }</span>
+      </td>
+      <td>
+      <span>{ props.booking.drop_off_address === "" ? "-- --"  : props.booking.drop_off_address }</span>
+      </td>
+      <td>
+        <span>{ props.booking.pick_up_time ? new Date(Date.parse(props.booking.pick_up_time)).toLocaleTimeString() : "-- --" }</span>
+      </td>
+      <td>
+        <span>{ props.booking.drop_off_time ? new Date(Date.parse(props.booking.drop_off_time)).toLocaleTimeString() : "-- --" }</span>
+      </td>
+
+    </tr>
   )
 }
-
-// Booking No: {props.booking.id} | Dispatcher: {props.booking.dispatcher.name} | Account: {props.booking.account.name} | Driver: {props.booking.driver ? props.booking.driver.name : "   "} | Date: {props.booking.date} | Vehcile: {props.booking.vehicle ? props.booking.vehicle.id : "   "} | P/U Address: {props.booking.pick_up_address} | D/O Address: {props.booking.drop_off_address} | Trip Status: {props.booking.trip_status} | Price: ${props.booking.price} | Passenger Name: {props.booking.passenger_name} | Created at: {props.booking.created_at}
 
 export default BookingRow

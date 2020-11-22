@@ -13,3 +13,29 @@
 .createBooking { 
   margin:  2rem;
 }
+
+table {
+  margin: auto;
+  width: 50%;
+  border: 3px solid rgb(1, 21, 1);
+  padding: 10px;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+
+th {
+  background-color: #4287f5;
+  color: white;
+}
+
+th,
+td {
+  width: 150px;
+  text-align: center;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+h2 {
+  color: #4287f5;
+}

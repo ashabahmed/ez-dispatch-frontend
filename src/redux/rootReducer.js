@@ -4,6 +4,7 @@ const defaultState = {
   bookings: [],
   drivers: [],
   dispatchers: [],
+  accounts: [],
   dateFromReducer: (new Date()) 
 }
 
@@ -36,16 +37,22 @@ function dispatchersReducer(state = defaultState.dispatchers, action) {
   }
 };
 
-// function dateReducer(state = defaultState.currentDate, action) {
+function accountsReducer(state = defaultState.accounts, action) {
+  switch (action.type) {
+    case "GET_ACCOUNTS":
+      return action.payload
+    default:
+      return state;
+  }
+};
 
 
-// }
 
 const rootReducer = combineReducers({
   bookings: bookingsReducer,
   drivers: driversReducer,
-  dispatchers: dispatchersReducer
-  // currentDate: dateReducer
+  dispatchers: dispatchersReducer,
+  accounts: accountsReducer
 });
 
 

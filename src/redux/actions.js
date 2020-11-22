@@ -28,6 +28,16 @@ export function fetchDispatchersAction() {
   };
 };
 
+export function fetchAccountsAction() {
+  return function (dispatch) {
+    fetch('http://localhost:3000/accounts')
+      .then(resp => resp.json())
+      .then(accounts => dispatch({ type: "GET_ACCOUNTS", payload: accounts }))
+      .catch(console.log)
+
+  };
+};
+
 
 export function createNewBookingAction(newBookingObj) {
   return function (dispatch) {
