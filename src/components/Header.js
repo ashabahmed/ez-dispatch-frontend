@@ -24,7 +24,7 @@ class Header extends React.Component {
           <button onClick={this.addBookingClick}className="createBooking">Add Booking</button>
           
         </div>
-        <div><h3 style={{textAlign: "center"}} >Today: {this.props.currentDate.toDateString()} </h3></div>
+        <div><h3 style={{textAlign: "center"}} >Viewing: {this.props.currentDate.toDateString()} </h3></div>
         <hr/>
         <>
           <DispatchGrid currentDate={this.props.currentDate}/>

@@ -5,9 +5,17 @@ import { createNewBookingAction, fetchAccountsAction } from '../redux/actions';
 class AddBookingForm extends React.Component {
 
   state = {
-    pickupDate: '',
-    pickupTime: '',
-    name: ""
+    dispatcher: "2",
+    date: '',
+    pick_up_time: '',
+    account: "",
+    passenger_name: "",
+    passenger_number: "",
+    vehicle_type: "",
+    pick_up_address: "",
+    drop_off_address: "",
+    special_notes: "",
+    internal_notes: ""
   }
 
   componentDidMount(){
@@ -15,7 +23,6 @@ class AddBookingForm extends React.Component {
   }
 
   clickHandler = () => {
-    // e.preventDefault()
     this.props.routerProps.history.push('/header')
   }
 
@@ -50,15 +57,36 @@ class AddBookingForm extends React.Component {
     <div className="form-wrapper">
         <h1>Add Booking Form</h1>
           <form onSubmit={this.handleSubmit}>
-            Pick Up Date
-            <input type="date" value={this.state.pickupDate} name='pickupDate' onChange={this.handleChange}/>
+            Account Name:
+            <input type="text" value={this.state.account} name='account' onChange={this.handleChange}/>
             <br/> <br/>
-            Pick Up Time
-            <input type="time" value={this.state.pickupTime} name='pickupTime' onChange={this.handleChange}/>
+            Pick Up Date: 
+            <input type="date" value={this.state.date} name='date' onChange={this.handleChange}/>
             <br/> <br/>
-            Name
-            <input type="textarea" value={this.state.name} name='name' onChange={this.handleChange}/>
-
+            Pick Up Time: 
+            <input type="time" value={this.state.pick_up_time} name='pick_up_time' onChange={this.handleChange}/>
+            <br/> <br/>
+            Passengers: 
+            <input type="text" value={this.state.passenger_name} name='passenger_name' onChange={this.handleChange}/>
+            <br/> <br/>
+            Passengers Cell Number: 
+            <input type="number" value={this.state.passenger_number} name='passenger_number' onChange={this.handleChange}/>
+            <br/> <br/>
+            Vehicle Type:  
+            <input type="text" value={this.state.vehicle_type} name='vehicle_type' onChange={this.handleChange}/>
+            <br/> <br/>
+            Pick Up Address:  
+            <input type="text" value={this.state.pick_up_address} name='pick_up_address' onChange={this.handleChange}/>
+            <br/> <br/>
+            Drop Off Address:  
+            <input type="text" value={this.state.drop_off_address} name='drop_off_address' onChange={this.handleChange}/>
+            <br/> <br/>
+            Special Notes:  
+            <input type="text" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
+            <br/> <br/>
+            Internal Notes:  
+            <input type="textarea" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
+            <br/> <br/>
             <button>Create New Booking</button>
           </form>
           <br/> <br/>
