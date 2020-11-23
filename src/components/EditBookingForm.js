@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { createNewBookingAction, fetchAccountsAction } from '../redux/actions';
 
-class AddBookingForm extends React.Component {
+class EditBookingForm extends React.Component {
 
   state = {
     dispatcher: "2",
@@ -27,7 +27,7 @@ class AddBookingForm extends React.Component {
   }
 
   clickHandler = () => {
-    this.props.routerProps.history.push('/dispatch-grid')
+    this.props.routerProps.history.push('/header')
   }
 
   handleChange = (e) => {
@@ -38,15 +38,15 @@ class AddBookingForm extends React.Component {
     console.log("submitting")
     e.preventDefault();
     this.props.submitHandler(this.state)
-    this.props.routerProps.history.push('/header')
+    this.props.routerProps.history.push('/dispatch-grid')
   }
 
 
   render() {
-
+    
     return (
     <div className="form-wrapper">
-        <h1>Add Booking Form</h1>
+        <h1>Edit Booking Form</h1>
           <form onSubmit={this.handleSubmit} >
             <label>
               Select Account:
@@ -107,4 +107,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddBookingForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditBookingForm)

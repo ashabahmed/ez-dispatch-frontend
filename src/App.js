@@ -4,9 +4,11 @@ import Header from './components/Header'
 import { connect } from 'react-redux'
 import { fetchBookingsAction } from './redux/actions'
 import { BrowserRouter, Route, Switch } from "react-router-dom"
+import NavBar from './components/NavBar'
 
 import Login from './components/Login'
 import AddBookingForm from './components/AddBookingForm'
+import EditBookingForm from './components/EditBookingForm'
 
 class App extends React.Component {
   
@@ -35,9 +37,11 @@ class App extends React.Component {
     return (
       <>
       <BrowserRouter>
+        <NavBar />
         <Switch>
+          <Route path='/edit-booking' render={ routerProps =>  <EditBookingForm routerProps={routerProps}/> } />  
           <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />
-          <Route path='/header' render={ routerProps =>  <Header dayChangeHandler={this.dayChangeHandler } currentDate={this.state.currentDate} routerProps={routerProps}/> } />
+          <Route path='/dispatch-grid' render={ routerProps =>  <Header dayChangeHandler={this.dayChangeHandler } currentDate={this.state.currentDate} routerProps={routerProps}/> } />
           <Route path='/' render={ routerProps =>  <Login routerProps={routerProps}/> } />
         </Switch>
       </BrowserRouter>

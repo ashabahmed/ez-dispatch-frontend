@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import BookingRow from '../components/BookingRow'
 import { fetchDriversAction, fetchDispatchersAction } from '../redux/actions'
+import BookingDetailPage from '../components/BookingDetailPage'
 
 class DispatchGrid extends React.Component {
 
@@ -92,8 +93,7 @@ function mapStateToProps(state){
   return {
     bookings: state.bookings,
     drivers: state.drivers,
-    dispatchers: state.dispatchers,
-    dateFromReducer: state.dateFromReducer
+    dispatchers: state.dispatchers
   }
 }
 

@@ -12,6 +12,10 @@ class Header extends React.Component {
     this.props.routerProps.history.push('/add-booking')
   }
 
+  editBookingClick = () => {
+    this.props.routerProps.history.push('/edit-booking')
+  }
+
   render(){
     console.log(this.props)
     return (
@@ -21,8 +25,9 @@ class Header extends React.Component {
           <button onClick={() => {this.handleClick(-1)}}>Previous Day</button>
           <button onClick={() => {this.handleClick(+1)}}>Next Day</button>
           <button onClick={() => {this.handleClick()}}>Today</button>
-          <button onClick={this.addBookingClick}className="createBooking">Add Booking</button>
-          
+          <button onClick={this.addBookingClick} className="createBooking">Add Booking</button>
+          <button onClick={this.editBookingClick} className="editBooking">Edit Booking</button>
+
         </div>
         <div><h3 style={{textAlign: "center"}} >Viewing: {this.props.currentDate.toDateString()} </h3></div>
         <hr/>
