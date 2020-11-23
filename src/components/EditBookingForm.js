@@ -27,7 +27,7 @@ class EditBookingForm extends React.Component {
   }
 
   clickHandler = () => {
-    this.props.routerProps.history.push('/header')
+    this.props.routerProps.history.push('/dispatch-grid')
   }
 
   handleChange = (e) => {
@@ -43,7 +43,7 @@ class EditBookingForm extends React.Component {
 
 
   render() {
-    
+
     return (
     <div className="form-wrapper">
         <h1>Edit Booking Form</h1>

@@ -38,7 +38,6 @@ export function fetchAccountsAction() {
   };
 };
 
-
 export function createNewBookingAction(newBookingObj) {
   return function (dispatch) {
     fetch('http://localhost:3000/bookings', {
@@ -56,9 +55,19 @@ export function createNewBookingAction(newBookingObj) {
   };
 };
 
-
-export function dateAction() {
+export function editBookingAction(bookingId, editedBookingObj) {
   return function (dispatch) {
-    console.log("Inside dateAction")
-  }
-}
+    fetch(`http://localhost:3000/bookings/${bookingId}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(editedBookingObj)
+    })
+      .then(resp => resp.json())
+      .then(payload => dispatch({ type: "EDIT_BOOKING", payload }))
+      .catch(console.log)
+
+  };
+};

@@ -22,7 +22,7 @@ class Login extends React.Component {
   // }
 
   clickHandler = () => {
-    this.props.routerProps.history.push('/header')
+    this.props.routerProps.history.push('/dispatch-grid')
   }
 
   render() {

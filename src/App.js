@@ -2,9 +2,10 @@ import './App.css';
 import React from 'react';
 import Header from './components/Header'
 import { connect } from 'react-redux'
-import { fetchBookingsAction } from './redux/actions'
+import { fetchBookingsAction, fetchDriversAction, fetchDispatchersAction } from './redux/actions'
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import NavBar from './components/NavBar'
+import BookingDetailPage from './components/BookingDetailPage'
 
 import Login from './components/Login'
 import AddBookingForm from './components/AddBookingForm'
@@ -17,7 +18,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getState()
+    this.props.getBookings()
+    this.props.getDrivers()
+    this.props.getDispatchers()
   }
 
   changeTime = (rubyTime) => {
@@ -39,6 +42,7 @@ class App extends React.Component {
       <BrowserRouter>
         <NavBar />
         <Switch>
+          <Route path='/bookings/:id' render={ routerProps =>  <BookingDetailPage routerProps={routerProps}/> } />  
           <Route path='/edit-booking' render={ routerProps =>  <EditBookingForm routerProps={routerProps}/> } />  
           <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />
           <Route path='/dispatch-grid' render={ routerProps =>  <Header dayChangeHandler={this.dayChangeHandler } currentDate={this.state.currentDate} routerProps={routerProps}/> } />
@@ -51,7 +55,12 @@ class App extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { getState: () => dispatch(fetchBookingsAction()) }
+  return { 
+    getBookings: () => dispatch(fetchBookingsAction()),
+    getDrivers: () => dispatch(fetchDriversAction()),
+    getDispatchers: () => dispatch(fetchDispatchersAction()) 
+    
+  }
 }
 
 

@@ -32,7 +32,7 @@ class Header extends React.Component {
         <div><h3 style={{textAlign: "center"}} >Viewing: {this.props.currentDate.toDateString()} </h3></div>
         <hr/>
         <>
-          <DispatchGrid currentDate={this.props.currentDate}/>
+          <DispatchGrid routerProps={this.props.routerProps} currentDate={this.props.currentDate}/>
         </>
     </div>
     )

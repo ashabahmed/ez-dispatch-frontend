@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import BookingRow from '../components/BookingRow'
-import { fetchDriversAction, fetchDispatchersAction } from '../redux/actions'
-import BookingDetailPage from '../components/BookingDetailPage'
+// import BookingDetailPage from '../components/BookingDetailPage'
 
 class DispatchGrid extends React.Component {
 
@@ -11,14 +10,12 @@ class DispatchGrid extends React.Component {
   }
   
   componentDidMount(){
-    this.props.getDrivers()
-    this.props.getDispatchers()
     this.setState({ todaysBookings: this.todaysBookings() })
   }
   
   todaysBookings = (currentDate) => {
     if(currentDate === undefined){
-      console.log(this.props)
+      console.log("hello")
     } else {
       let todaysBookings = this.props.bookings.filter((booking) => {
         return currentDate.toDateString() === (new Date(Date.parse(booking.date))).toDateString()
@@ -28,10 +25,11 @@ class DispatchGrid extends React.Component {
   }
 
   renderBookings = () => {
-    return this.todaysBookings(this.props.currentDate).map((booking) => <BookingRow key={booking.id} booking={booking}/>)
+    return this.todaysBookings(this.props.currentDate).map((booking) => <BookingRow routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
   }
   
   render(){
+    console.log(this.props)
     return(
       <div>
         <table style={{textAlign: "center"}}>
@@ -82,12 +80,7 @@ class DispatchGrid extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return { 
-    getDrivers: () => dispatch(fetchDriversAction()),
-    getDispatchers: () => dispatch(fetchDispatchersAction())
-  }
-}
+
 
 function mapStateToProps(state){
   return {
@@ -97,4 +90,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DispatchGrid)
+export default connect(mapStateToProps)(DispatchGrid)

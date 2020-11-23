@@ -1,17 +1,20 @@
 import React from 'react'
+import BookingDetailPage from './BookingDetailPage'
+
 // import { NavLink } from 'react-router-dom'
 
 const BookingRow = (props) => {
-  
+
   const clickHandler = () => {
-    console.log(props.booking.id, "clicking booking")
+    
+    props.routerProps.history.push(`/bookings/${props.booking.id}`)
   }
 
   
   return (
   
       <tr onClick={clickHandler}>
-        {/* <NavLink className="bookingRowNavLink" to={ { pathname:`/bookings/${props.booking.id}` }}> */}
+        {/* <NavLink className="bookingRowNavLink" to={{ pathname:`/bookings/${props.booking.id}` }}> */}
         <td>
           <span>{ props.booking.id }</span>
         </td>
@@ -50,7 +53,6 @@ const BookingRow = (props) => {
         </td>
         {/* </NavLink>   */}
       </tr>
-    
     
   )
 }
