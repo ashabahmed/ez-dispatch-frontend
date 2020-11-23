@@ -55,9 +55,9 @@ export function createNewBookingAction(newBookingObj) {
   };
 };
 
-export function editBookingAction(bookingId, editedBookingObj) {
+export function editBookingAction(editedBookingObj) {
   return function (dispatch) {
-    fetch(`http://localhost:3000/bookings/${bookingId}`, {
+    fetch(`http://localhost:3000/bookings/${editedBookingObj.id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

@@ -43,7 +43,7 @@ class App extends React.Component {
         <NavBar />
         <Switch>
           <Route path='/bookings/:id' render={ routerProps =>  <BookingDetailPage routerProps={routerProps}/> } />  
-          <Route path='/edit-booking' render={ routerProps =>  <EditBookingForm routerProps={routerProps}/> } />  
+          <Route path='/edit-booking/:id' render={ routerProps =>  <EditBookingForm routerProps={routerProps}/> } />  
           <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />
           <Route path='/dispatch-grid' render={ routerProps =>  <Header dayChangeHandler={this.dayChangeHandler } currentDate={this.state.currentDate} routerProps={routerProps}/> } />
           <Route path='/' render={ routerProps =>  <Login routerProps={routerProps}/> } />

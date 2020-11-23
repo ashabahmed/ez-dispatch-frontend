@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { createNewBookingAction, fetchAccountsAction } from '../redux/actions';
+import { createNewBookingAction, fetchAccountsAction, editBookingAction } from '../redux/actions';
 
 class EditBookingForm extends React.Component {
 
@@ -18,7 +18,19 @@ class EditBookingForm extends React.Component {
     internal_notes: ""
   }
 
+  gettingBooking = () => {
+    let id = parseInt(this.props.routerProps.match.params.id)
+    let foundBooking
+    if (this.props.bookings.length > 0 ) {
+      foundBooking = this.props.bookings.find(b => b.id === id)
+    }
+    return foundBooking
+  }
+
   componentDidMount(){
+    this.setState({ 
+      account: this.gettingBooking().account.name
+    })
     this.props.getAccounts()
   }
 
@@ -37,15 +49,16 @@ class EditBookingForm extends React.Component {
   handleSubmit = (e) => {
     console.log("submitting")
     e.preventDefault();
-    this.props.submitHandler(this.state)
+    this.props.editedBookingObj(this.state)
     this.props.routerProps.history.push('/dispatch-grid')
   }
 
 
   render() {
-
+    console.log(this.gettingBooking())
     return (
     <div className="form-wrapper">
+      {/* <h1>Booking show page for {this.gettingBooking().account.name}</h1> */}
         <h1>Edit Booking Form</h1>
           <form onSubmit={this.handleSubmit} >
             <label>
@@ -97,12 +110,14 @@ class EditBookingForm extends React.Component {
 function mapDispatchToProps(dispatch){
   return { 
     submitHandler: (newBookingObj) => dispatch(createNewBookingAction(newBookingObj)),
-    getAccounts: () => dispatch(fetchAccountsAction())
+    getAccounts: () => dispatch(fetchAccountsAction()),
+    editBooking: (editedBookingObj) => dispatch(editBookingAction(editedBookingObj))
   }
 }
 
 function mapStateToProps(state){
   return {
+    bookings: state.bookings,
     accounts: state.accounts
   }
 }

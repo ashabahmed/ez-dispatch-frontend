@@ -5,7 +5,7 @@ const defaultState = {
   drivers: [],
   dispatchers: [],
   accounts: [],
-  dateFromReducer: (new Date()) 
+  editableBooking: null
 }
 
 function bookingsReducer(state = defaultState.bookings, action) {
@@ -13,7 +13,9 @@ function bookingsReducer(state = defaultState.bookings, action) {
     case "GET_BOOKINGS":
       return action.payload
     case "ADD_BOOKING":
-        return [...state, action.payload];
+      return [...state, action.payload];
+    case "EDIT_BOOKING":
+      return [...state, action.payload];
     default:
       return state;
   }

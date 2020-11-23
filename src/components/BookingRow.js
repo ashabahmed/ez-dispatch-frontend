@@ -1,18 +1,20 @@
-import React from 'react'
-import BookingDetailPage from './BookingDetailPage'
+import React, { Fragment } from 'react'
+// import BookingDetailPage from './BookingDetailPage'
 
 // import { NavLink } from 'react-router-dom'
 
 const BookingRow = (props) => {
 
   const clickHandler = () => {
-    
     props.routerProps.history.push(`/bookings/${props.booking.id}`)
   }
 
+  const editBookingClick = () => {
+    props.routerProps.history.push(`/edit-booking/${props.booking.id}`)
+  }
   
   return (
-  
+    <Fragment>
       <tr onClick={clickHandler}>
         {/* <NavLink className="bookingRowNavLink" to={{ pathname:`/bookings/${props.booking.id}` }}> */}
         <td>
@@ -51,9 +53,11 @@ const BookingRow = (props) => {
         <td>
           <span>{ props.booking.drop_off_time ? new Date(Date.parse(props.booking.drop_off_time)).toLocaleTimeString() : "-- --" }</span>
         </td>
+        
         {/* </NavLink>   */}
       </tr>
-    
+      <button onClick={editBookingClick} className="editBooking">Edit Booking</button>
+    </Fragment>
   )
 }
 
