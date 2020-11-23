@@ -5,6 +5,7 @@ import { createNewBookingAction, fetchAccountsAction, editBookingAction } from '
 class EditBookingForm extends React.Component {
 
   state = {
+    id: null,
     dispatcher: "2",
     date: '',
     pick_up_time: '',
@@ -29,7 +30,9 @@ class EditBookingForm extends React.Component {
 
   componentDidMount(){
     this.setState({ 
+      id: this.gettingBooking().id,
       account: this.gettingBooking().account.name
+
     })
     this.props.getAccounts()
   }
@@ -49,16 +52,16 @@ class EditBookingForm extends React.Component {
   handleSubmit = (e) => {
     console.log("submitting")
     e.preventDefault();
-    this.props.editedBookingObj(this.state)
+    this.props.editBooking(this.state)
     this.props.routerProps.history.push('/dispatch-grid')
   }
 
 
   render() {
-    console.log(this.gettingBooking())
+    console.log(this.props)
     return (
     <div className="form-wrapper">
-      {/* <h1>Booking show page for {this.gettingBooking().account.name}</h1> */}
+  
         <h1>Edit Booking Form</h1>
           <form onSubmit={this.handleSubmit} >
             <label>
@@ -90,12 +93,12 @@ class EditBookingForm extends React.Component {
             <input type="text" value={this.state.drop_off_address} name='drop_off_address' onChange={this.handleChange}/>
             <br/> <br/>
             Special Notes:  
-            <input type="text" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
+            <textarea rows="5" cols="28" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
             <br/> <br/>
             Internal Notes:  
-            <input type="textarea" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
+            <textarea rows="5" cols="28" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
             <br/> <br/>
-            <button>Create New Booking</button>
+            <button>Edit Booking</button>
 
           </form>
           <br/> <br/>

@@ -77,10 +77,10 @@ class AddBookingForm extends React.Component {
             <input type="text" value={this.state.drop_off_address} name='drop_off_address' onChange={this.handleChange}/>
             <br/> <br/>
             Special Notes:  
-            <input type="text" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
+            <textarea rows="5" cols="28" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
             <br/> <br/>
             Internal Notes:  
-            <input type="textarea" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
+            <textarea rows="5" cols="28" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
             <br/> <br/>
             <button>Create New Booking</button>
 
