@@ -7,21 +7,27 @@ class BookingRow extends React.Component {
   state = {
     driverName: "",
     driver_id: 0,
-    trip_status: "Booked"
+    trip_status: "Booked",
+    vehicle_id: 0,
+    vehicle_type: "-- --",
+    vehicleTypeBgColor: "white"
   }
   
   componentDidMount(){
     
-    this.setState({ trip_status: this.props.booking.trip_status})
-
+    this.setState({ vehicleTypeBgColor: this.vehicleTypeBgColor() })
+    this.setState({ trip_status: this.props.booking.trip_status })
+    this.setState({ vehicle_type: this.props.booking.vehicle_type })
     if (this.props.booking.driver){
       this.setState({ driver_id: this.props.booking.driver.id })
+    }
+    if (this.props.booking.vehicle){
+      this.setState({ vehicle_id: this.props.booking.vehicle.id })
     }
     
   }
 
   bookingDriverChangeHandler = (e) => {
-
     let obj = {}
     obj[`${e.target.name }`] = e.target.value
 
@@ -35,6 +41,23 @@ class BookingRow extends React.Component {
     })
     .then(resp => resp.json())
     .then(data => this.setState({ driver_id: data.driver.id }))
+  }
+
+
+  bookingVehicleNumberChangeHandler = (e) => {
+    let obj = {}
+    obj[`${e.target.name }`] = e.target.value
+
+    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(obj)
+    })
+    .then(resp => resp.json())
+    .then(data => this.setState({ vehicle_id: data.vehicle.id }))
   }
 
   bookingTripStatusChangeHandler = (e) => {
@@ -53,11 +76,33 @@ class BookingRow extends React.Component {
     .then(data => this.setState({ trip_status: data.trip_status }))
   }
 
+  vehicleTypeChangeHandler = (e) => {
+    let obj = {}
+    obj[`${e.target.name }`] = e.target.value
+
+    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(obj)
+    })
+    .then(resp => resp.json())
+    .then(data => this.setState({ vehicle_type: data.vehicle_type }))
+  }
+
 
   driverNameOptions = () => {
     let fakeObj = {name: " "}
     let newArray = [fakeObj, ...this.props.drivers]
     return newArray.map((driver) => (<option key={driver.id} value={driver.id}>{driver.name}</option>))
+  }
+
+  vehicleNumberOptions = () => {
+    let fakeObj = {id: " "}
+    let newArray = [fakeObj, ...this.props.vehicles]
+    return newArray.map((vehicle) => (<option key={vehicle.id} value={vehicle.id}>{vehicle.id}</option>))
   }
 
   clickHandler = () => {
@@ -73,7 +118,7 @@ class BookingRow extends React.Component {
   }
 
   vehicleTypeBgColor = () => {
-    switch (this.props.booking.vehicle && this.props.booking.vehicle.vehicle_type) {
+    switch (this.props.booking.vehicle_type) {
       case "Sedan":
         return "blue"
       case "SUV":
@@ -91,8 +136,27 @@ class BookingRow extends React.Component {
     }
   }
 
+  bookingStatusBgColor = () => {
+    switch (this.props.booking.trip_status) {
+      case "No Show":
+        return "red"
+      case "Cancelled":
+        return "gray"
+      case "Dropped":
+        return "pink"
+      case "Luxury Van":
+        return "orange"
+      case "Cargo Van":
+        return "yellow"
+      case "Extended SUV":
+        return "green" 
+      default:
+        return "white";
+    }
+  }
+
   render(){
-    // console.log(this.props.vehicle_type)
+    
     return (
       <Fragment>
         <tr >
@@ -100,10 +164,19 @@ class BookingRow extends React.Component {
             <span onClick={this.clickHandler}>{ this.props.booking.id }</span>
           </td>
           <td style={ {backgroundColor: this.vehicleTypeBgColor()} }>
-            <span>{ this.props.booking.vehicle ? this.props.booking.vehicle.vehicle_type : "-- --" }</span>
+          <select value={this.state.vehicle_type} onChange={this.vehicleTypeChangeHandler} name="vehicle_type">
+              <option value="Sedan">Sedan</option>
+              <option value="SUV">SUV</option>
+              <option value="Stretch Limo">Stretch Limo</option>
+              <option value="Luxury Van">Luxury Van</option>
+              <option value="Cargo Van">Cargo Van</option>
+              <option value="Extended SUV">Extended SUV</option>
+            </select>
           </td>
           <td>
-            <span>{ this.props.booking.vehicle ? this.props.booking.vehicle.id : "-- --" }</span>
+            <select value={this.state.vehicle_id} onChange={this.bookingVehicleNumberChangeHandler} name="vehicle_id">
+              {this.vehicleNumberOptions()}
+            </select>
           </td>
           <td>
             <span>{ this.props.booking.account ? this.props.booking.account.name : "-- --" }</span>
@@ -120,7 +193,7 @@ class BookingRow extends React.Component {
             </select>
           </td>
           <td>
-            <span>{ this.props.booking.account.passengers === "" ? this.props.booking.account.name : this.props.booking.passenger_name }</span>
+            <span>{ this.props.booking.passenger_name !== "" ?  this.props.booking.passenger_name : this.props.booking.account.name }</span>
           </td>
           <td>
             <select value={this.state.driver_id} onChange={this.bookingDriverChangeHandler} name="driver_id">
@@ -152,3 +225,5 @@ class BookingRow extends React.Component {
 }
 
 export default BookingRow
+
+

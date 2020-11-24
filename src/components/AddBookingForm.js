@@ -47,7 +47,7 @@ class AddBookingForm extends React.Component {
   render() {
 
     return (
-    <div className="form-wrapper">
+    <div style={{textAlign: "center"}} className="form-wrapper">
         <h1>Add Booking Form</h1>
           <form onSubmit={this.handleSubmit} >
             <label>

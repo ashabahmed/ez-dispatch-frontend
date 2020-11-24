@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import Header from './components/Header'
 import { connect } from 'react-redux'
-import { fetchBookingsAction, fetchDriversAction, fetchDispatchersAction } from './redux/actions'
+import { fetchBookingsAction, fetchDriversAction, fetchDispatchersAction, fetchVehiclesAction } from './redux/actions'
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import NavBar from './components/NavBar'
 import BookingDetailPage from './components/BookingDetailPage'
@@ -21,6 +21,7 @@ class App extends React.Component {
     this.props.getBookings()
     this.props.getDrivers()
     this.props.getDispatchers()
+    this.props.getVehicles()
   }
 
   changeTime = (rubyTime) => {
@@ -58,7 +59,8 @@ function mapDispatchToProps(dispatch) {
   return { 
     getBookings: () => dispatch(fetchBookingsAction()),
     getDrivers: () => dispatch(fetchDriversAction()),
-    getDispatchers: () => dispatch(fetchDispatchersAction()) 
+    getDispatchers: () => dispatch(fetchDispatchersAction()),
+    getVehicles: () => dispatch(fetchVehiclesAction()) 
     
   }
 }

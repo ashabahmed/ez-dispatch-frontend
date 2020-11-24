@@ -25,10 +25,14 @@ class DispatchGrid extends React.Component {
   }
 
   renderBookings = () => {
-    return this.bookingsbyDay(this.props.currentDate).map((booking) => <BookingRow drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+    return this.bookingsbyDay(this.props.currentDate).map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
   }
+//have a state to check show all or booked
+//depending on the state, render through a filter where bookings are booked or all. Can make 2 functions and call one or the other
+
   
   render(){
+    
     return(
       <div>
         <table style={{textAlign: "center"}}>
@@ -86,7 +90,8 @@ function mapStateToProps(state){
   return {
     bookings: state.bookings,
     drivers: state.drivers,
-    dispatchers: state.dispatchers
+    dispatchers: state.dispatchers,
+    vehicles: state.vehicles
   }
 }
 

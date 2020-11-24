@@ -65,7 +65,7 @@ class EditBookingForm extends React.Component {
   render() {
     console.log(this.state)
     return (
-    <div className="form-wrapper">
+    <div style={{textAlign: "center"}} className="form-wrapper">
   
           <h1>Edit Booking Form for Booking Number {this.gettingBooking().id}</h1>
           <form onSubmit={this.handleSubmit} >
