@@ -23,7 +23,9 @@ class AddBookingForm extends React.Component {
   }
 
   accountNameOptions = () => {
-    return this.props.accounts.map((account) => (<option key={account.id} value={account.name}>{account.name}</option>))
+    let fakeObj = {name: " "}
+    let newArray = [fakeObj, ...this.props.accounts]
+    return newArray.map((account) => (<option key={account.id} value={account.id}>{account.name}</option>))
   }
 
   clickHandler = () => {
@@ -38,7 +40,7 @@ class AddBookingForm extends React.Component {
     console.log("submitting")
     e.preventDefault();
     this.props.submitHandler(this.state)
-    this.props.routerProps.history.push('/header')
+    this.props.routerProps.history.push('/dispatch-grid')
   }
 
 

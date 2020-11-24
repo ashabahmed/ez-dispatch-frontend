@@ -10,10 +10,10 @@ class DispatchGrid extends React.Component {
   }
   
   componentDidMount(){
-    this.setState({ todaysBookings: this.todaysBookings() })
+    this.setState({ todaysBookings: this.bookingsbyDay() })
   }
   
-  todaysBookings = (currentDate) => {
+  bookingsbyDay = (currentDate) => {
     if(currentDate === undefined){
       console.log("hello")
     } else {
@@ -25,11 +25,10 @@ class DispatchGrid extends React.Component {
   }
 
   renderBookings = () => {
-    return this.todaysBookings(this.props.currentDate).map((booking) => <BookingRow routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+    return this.bookingsbyDay(this.props.currentDate).map((booking) => <BookingRow drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
   }
   
   render(){
-    console.log(this.props)
     return(
       <div>
         <table style={{textAlign: "center"}}>
@@ -71,6 +70,9 @@ class DispatchGrid extends React.Component {
             <th>
               Drop-off Time
             </th>
+            <th>
+              Edit?
+            </th>
           </tr>
           </thead>
           <tbody>{this.renderBookings()}</tbody>
@@ -79,8 +81,6 @@ class DispatchGrid extends React.Component {
     )
   }
 }
-
-
 
 function mapStateToProps(state){
   return {

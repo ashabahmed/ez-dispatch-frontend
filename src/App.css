@@ -10,11 +10,11 @@
   transform: translate(-50%, -50%);
 } */
 
-button { 
+/* button { 
   margin:  2rem;
-}
+} */
 
-/* table {
+table {
   margin: auto;
   width: 50%;
   border: 3px solid rgb(1, 21, 1);
@@ -37,9 +37,9 @@ th, td {
 
 h2 {
   color: #4287f5;
-} */
+}
 
-/* .navbar {
+.navbar {
   margin: 10px;
   display: block;
   justify-content: space-around;
@@ -59,7 +59,7 @@ a:link,a:visited {
   margin: 3px 10px;
   font-size: 24pt;
   padding: 10px;
-} */
+}
 
 /* .bookingRowNavLink {
 

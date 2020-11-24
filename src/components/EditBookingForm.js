@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { createNewBookingAction, fetchAccountsAction, editBookingAction } from '../redux/actions';
+import { fetchAccountsAction, editBookingAction } from '../redux/actions';
 
 class EditBookingForm extends React.Component {
 
@@ -29,16 +29,21 @@ class EditBookingForm extends React.Component {
   }
 
   componentDidMount(){
+    let booking = this.gettingBooking()
+    
     this.setState({ 
-      id: this.gettingBooking().id,
-      account: this.gettingBooking().account.name
-
-    })
+      id: booking.id,
+      account: booking.account.name,
+      special_notes: booking.special_notes,
+      date: booking.booking_date,
+      pick_up_time: booking.booking_time
+    });
     this.props.getAccounts()
   }
 
   accountNameOptions = () => {
-    return this.props.accounts.map((account) => (<option key={account.id} value={account.name}>{account.name}</option>))
+    let newArray = [...this.props.accounts]
+    return newArray.map((account) => (<option key={account.id} value={account.id}>{account.name}</option>))
   }
 
   clickHandler = () => {
@@ -58,11 +63,11 @@ class EditBookingForm extends React.Component {
 
 
   render() {
-    console.log(this.props)
+    console.log(this.state)
     return (
     <div className="form-wrapper">
   
-        <h1>Edit Booking Form</h1>
+          <h1>Edit Booking Form for Booking Number {this.gettingBooking().id}</h1>
           <form onSubmit={this.handleSubmit} >
             <label>
               Select Account:
@@ -109,10 +114,8 @@ class EditBookingForm extends React.Component {
   }
 }
 
-
 function mapDispatchToProps(dispatch){
   return { 
-    submitHandler: (newBookingObj) => dispatch(createNewBookingAction(newBookingObj)),
     getAccounts: () => dispatch(fetchAccountsAction()),
     editBooking: (editedBookingObj) => dispatch(editBookingAction(editedBookingObj))
   }
