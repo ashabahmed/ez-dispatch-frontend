@@ -6,18 +6,21 @@ class BookingRow extends React.Component {
 
   state = {
     driverName: "",
-    driver_id: 0
+    driver_id: 0,
+    trip_status: "Booked"
   }
   
   componentDidMount(){
     
+    this.setState({ trip_status: this.props.booking.trip_status})
+
     if (this.props.booking.driver){
       this.setState({ driver_id: this.props.booking.driver.id })
     }
     
   }
 
-  bookingRowChangeHandler = (e) => {
+  bookingDriverChangeHandler = (e) => {
 
     let obj = {}
     obj[`${e.target.name }`] = e.target.value
@@ -32,6 +35,22 @@ class BookingRow extends React.Component {
     })
     .then(resp => resp.json())
     .then(data => this.setState({ driver_id: data.driver.id }))
+  }
+
+  bookingTripStatusChangeHandler = (e) => {
+    let obj = {}
+    obj[`${e.target.name }`] = e.target.value
+
+    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(obj)
+    })
+    .then(resp => resp.json())
+    .then(data => this.setState({ trip_status: data.trip_status }))
   }
 
 
@@ -54,7 +73,7 @@ class BookingRow extends React.Component {
   }
 
   vehicleTypeBgColor = () => {
-    switch (this.props.vehicle_type) {
+    switch (this.props.booking.vehicle && this.props.booking.vehicle.vehicle_type) {
       case "Sedan":
         return "blue"
       case "SUV":
@@ -93,13 +112,18 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.date ? new Date(Date.parse(this.props.booking.date)).toLocaleString() : "-- --" }</span>
           </td>
           <td>
-            <span>{ this.props.booking.trip_status }</span>
+            <select value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
+              <option value="Booked">Booked</option>
+              <option value="No Show">No Show</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="Dropped">Dropped</option>
+            </select>
           </td>
           <td>
             <span>{ this.props.booking.account.passengers === "" ? this.props.booking.account.name : this.props.booking.passenger_name }</span>
           </td>
           <td>
-            <select value={this.state.driver_id} onChange={this.bookingRowChangeHandler} name="driver_id">
+            <select value={this.state.driver_id} onChange={this.bookingDriverChangeHandler} name="driver_id">
               {this.driverNameOptions()}
             </select>
           </td>
