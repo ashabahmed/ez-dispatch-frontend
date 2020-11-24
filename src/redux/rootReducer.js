@@ -5,6 +5,7 @@ const defaultState = {
   drivers: [],
   dispatchers: [],
   accounts: [],
+  vehicles: [],
   editableBooking: null
 }
 
@@ -50,12 +51,23 @@ function accountsReducer(state = defaultState.accounts, action) {
 };
 
 
+function vehiclesReducer(state = defaultState.vehicles, action) {
+  switch (action.type) {
+    case "GET_VEHICLES":
+      return action.payload
+    default:
+      return state;
+  }
+};
+
+
 
 const rootReducer = combineReducers({
   bookings: bookingsReducer,
   drivers: driversReducer,
   dispatchers: dispatchersReducer,
-  accounts: accountsReducer
+  accounts: accountsReducer,
+  vehicles: vehiclesReducer
 });
 
 

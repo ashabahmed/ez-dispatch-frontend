@@ -5,13 +5,35 @@ import React, { Fragment } from 'react'
 class BookingRow extends React.Component {
 
   state = {
-    driverName : "",
-    driver: {}
+    driverName: "",
+    driver_id: 0
   }
   
   componentDidMount(){
-    this.setState({driver: this.props.booking.driver})
+    
+    if (this.props.booking.driver){
+      this.setState({ driver_id: this.props.booking.driver.id })
+    }
+    
   }
+
+  bookingRowChangeHandler = (e) => {
+
+    let obj = {}
+    obj[`${e.target.name }`] = e.target.value
+
+    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(obj)
+    })
+    .then(resp => resp.json())
+    .then(data => this.setState({ driver_id: data.driver.id }))
+  }
+
 
   driverNameOptions = () => {
     let fakeObj = {name: " "}
@@ -77,7 +99,7 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.account.passengers === "" ? this.props.booking.account.name : this.props.booking.passenger_name }</span>
           </td>
           <td>
-            <select value={this.state.driverName} onChange={this.handleChange} name="driverName">
+            <select value={this.state.driver_id} onChange={this.bookingRowChangeHandler} name="driver_id">
               {this.driverNameOptions()}
             </select>
           </td>

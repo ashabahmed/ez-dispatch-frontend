@@ -36,7 +36,7 @@ class EditBookingForm extends React.Component {
       account: booking.account.id,
       special_notes: booking.special_notes,
       date: booking.booking_date,
-      pick_up_time: booking.booking_time, 
+      pick_up_time: booking.booking_time
     });
     this.props.getAccounts()
   }

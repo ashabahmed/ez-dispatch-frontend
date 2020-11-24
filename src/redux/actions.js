@@ -28,6 +28,16 @@ export function fetchDispatchersAction() {
   };
 };
 
+export function fetchVehiclesAction() {
+  return function (dispatch) {
+    fetch('http://localhost:3000/vehicles')
+      .then(resp => resp.json())
+      .then(vehicles => dispatch({ type: "GET_VEHICLES", payload: vehicles }))
+      .catch(console.log)
+
+  };
+};
+
 export function fetchAccountsAction() {
   return function (dispatch) {
     fetch('http://localhost:3000/accounts')
