@@ -63,7 +63,7 @@ class EditBookingForm extends React.Component {
 
 
   render() {
-    console.log(this.state)
+    console.log(this.state.pick_up_time)
     return (
     <div style={{textAlign: "center"}} className="form-wrapper">
   
