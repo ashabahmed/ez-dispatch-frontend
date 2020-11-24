@@ -15,10 +15,8 @@ function bookingsReducer(state = defaultState.bookings, action) {
     case "ADD_BOOKING":
       return [...state, action.payload];
     case "EDIT_BOOKING":
-      let newArray = [...state]
-      let foundObj = newArray.find(booking => booking.id === action.payload.id)
-      newArray[newArray.indexOf(foundObj)] = action.payload
-      return { state: newArray }
+      let newArray = state.filter(booking => booking.id !== action.payload.id)
+      return [...newArray, action.payload]
     default:
       return state;
   }

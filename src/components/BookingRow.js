@@ -51,6 +51,7 @@ class BookingRow extends React.Component {
   }
 
   render(){
+    // console.log(this.props.vehicle_type)
     return (
       <Fragment>
         <tr >
@@ -73,7 +74,7 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.trip_status }</span>
           </td>
           <td>
-            <span>{ this.props.booking.account.passengers === "" ? this.props.booking.account.name : this.props.booking.account.passengers }</span>
+            <span>{ this.props.booking.account.passengers === "" ? this.props.booking.account.name : this.props.booking.passenger_name }</span>
           </td>
           <td>
             <select value={this.state.driverName} onChange={this.handleChange} name="driverName">
