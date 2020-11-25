@@ -9,7 +9,6 @@ class DispatchGrid extends React.Component {
     filtered: "Booked"
   }
   
-
   bookingsbyDay = (currentDate) => {
     if(currentDate === undefined){
       console.log("hello")
@@ -22,7 +21,15 @@ class DispatchGrid extends React.Component {
   }
 
   renderBookings = () => {
-    return this.bookingsbyDay(this.props.currentDate).map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+    let filteredBookings = this.bookingsbyDay(this.props.currentDate)
+
+    if(this.state.filter !== "Booked"){
+      filteredBookings = filteredBookings.filter(booking => booking.trip_status === this.state.filtered)
+      return filteredBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+    } else {
+      return filteredBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+    }
+    
   }
 
   updateFilter(type) {
@@ -40,6 +47,7 @@ class DispatchGrid extends React.Component {
               <option value="Booked">Booked</option>
               <option value="Dropped">Dropped</option>
               <option value="Cancelled">Cancelled</option>
+              <option value="All">All</option>
             </select>
           </label>
         </div>  
