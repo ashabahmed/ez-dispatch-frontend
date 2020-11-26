@@ -14,7 +14,9 @@ class DispatchGrid extends React.Component {
       console.log("hello")
     } else {
       let todaysBookings = this.props.bookings.filter((booking) => {
-        return currentDate.toDateString() === (new Date(Date.parse(booking.date))).toDateString()
+        console.log("current date", currentDate.toDateString())
+        console.log("")
+        return currentDate.toDateString() === (new Date((booking.date))).toDateString()
       })
       return todaysBookings
     }

@@ -82,12 +82,12 @@ class EditBookingForm extends React.Component {
             </select>
           </label>
           <br/> <br/>
-          Pick Up Date: 
-          <input type="date" value={this.state.date} name='date' onChange={this.handleChange}/>
+          Scheduled Pick-up: 
+          <input type="datetime-local" value={this.state.date} name='date' onChange={this.handleChange}/>
           <br/> <br/>
-          Pick Up Time: 
+          {/* Pick Up Time: 
           <input type="time" value={this.state.pick_up_time} name='pick_up_time' onChange={this.handleChange}/>
-          <br/> <br/>
+          <br/> <br/> */}
           Passengers: 
           <input type="text" value={this.state.passenger_name} name='passenger_name' onChange={this.handleChange}/>
           <br/> <br/>

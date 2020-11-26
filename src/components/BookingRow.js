@@ -180,7 +180,10 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.account ? this.props.booking.account.name : "-- --" }</span>
           </td>
           <td>
-            <span>{ this.props.booking.date ? new Date(Date.parse(this.props.booking.date)).toLocaleString() : "-- --" }</span>
+            {/* <span>{ this.props.booking.date ? new Date(Date.parse(this.props.booking.date)).toLocaleString('en-US', {timeZone: 'UTC'}) : "-- --" }</span> */}
+            <span>{ this.props.booking.date ? new Date(this.props.booking.date).toDateString('en-us') : "-- --" }</span>
+            <br/>
+            {/* <span>{ this.props.booking.date ? new Date(this.props.booking.date).toTimeString('en-us') : "-- --" }</span> */}
           </td>
           <td>
             <select value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
@@ -205,10 +208,10 @@ class BookingRow extends React.Component {
           <span>{ this.props.booking.drop_off_address === "" ? "-- --"  : this.props.booking.drop_off_address }</span>
           </td>
           <td>
-            <span>{ this.props.booking.pick_up_time ? new Date(Date.parse(this.props.booking.pick_up_time)).toLocaleTimeString() : "-- --" }</span>
+            <span>{ this.props.booking.pick_up_time ? new Date(this.props.booking.pick_up_time).toLocaleTimeString('en-US', {timeZone: 'UTC'}) : "-- --" }</span>
           </td>
           <td>
-            <span>{ this.props.booking.drop_off_time ? new Date(Date.parse(this.props.booking.drop_off_time)).toLocaleTimeString() : "-- --" }</span>
+            <span>{ this.props.booking.drop_off_time ? new Date(this.props.booking.drop_off_time).toLocaleTimeString('en-US', {timeZone: 'UTC'}) : "-- --" }</span>
           </td>
           <td>
             <button onClick={this.editBookingClick} className="editBooking">Edit Booking</button>
