@@ -32,57 +32,46 @@ class BookingRow extends React.Component {
     let obj = {}
     obj[`${e.target.name }`] = e.target.value
 
-    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json"
-      },
-      body: JSON.stringify(obj)
-    })
-    .then(resp => resp.json())
-    .then(data => this.setState({ driver_id: data.driver.id }))
+    this.props.updateBooking(this.props.booking.id, obj)
+    this.setState({ driver_id: e.target.value })
   }
-
 
   bookingVehicleNumberChangeHandler = (e) => {
     let obj = {}
     obj[`${e.target.name }`] = e.target.value
 
-    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json"
-      },
-      body: JSON.stringify(obj)
-    })
-    .then(resp => resp.json())
-    .then(data => this.setState({ vehicle_id: data.vehicle.id }))
+    this.props.updateBooking(this.props.booking.id, obj)
+    this.setState({ vehicle_id: e.target.value })
   }
 
   bookingTripStatusChangeHandler = (e) => {
     let obj = {}
     obj[`${e.target.name }`] = e.target.value
+    console.log(e.target.value)
+    switch(e.target.value){
+      
+      case "Picked Up":
+        obj["pick_up_time"] = new Date()
+        break
+      case "Dropped":
+        console.log(e.target.value)
+        obj["drop_off_time"] = new Date()
+        break
+      default: 
+        return obj
+    }
 
-    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json"
-      },
-      body: JSON.stringify(obj)
-    })
-    .then(resp => resp.json())
-    .then(data => this.setState({ trip_status: data.trip_status }))
+    this.props.updateBooking(this.props.booking.id, obj)
+    this.setState({ trip_status: e.target.value })
   }
 
   vehicleTypeChangeHandler = (e) => {
     let obj = {}
+    
     obj[`${e.target.name }`] = e.target.value
 
     this.props.updateBooking(this.props.booking.id, obj)
-    this.setState({ vehicle_type: e.target.value})
+    this.setState({ vehicle_type: e.target.value })
   }
 
 
@@ -137,12 +126,6 @@ class BookingRow extends React.Component {
         return "gray"
       case "Dropped":
         return "pink"
-      case "Luxury Van":
-        return "orange"
-      case "Cargo Van":
-        return "yellow"
-      case "Extended SUV":
-        return "green" 
       default:
         return "white";
     }
@@ -176,15 +159,17 @@ class BookingRow extends React.Component {
           </td>
           <td>
             {/* <span>{ this.props.booking.date ? new Date(Date.parse(this.props.booking.date)).toLocaleString('en-US', {timeZone: 'UTC'}) : "-- --" }</span> */}
-            <span>{ this.props.booking.date ? new Date(this.props.booking.date).toDateString('en-us') : "-- --" }</span>
+            <span>{ this.props.booking.date ? (new Date(this.props.booking.date).toDateString('en-us')).slice(4, 15) : "-- --" }</span>
             <br/>
-            {/* <span>{ this.props.booking.date ? new Date(this.props.booking.date).toTimeString('en-us') : "-- --" }</span> */}
+            <span>{ this.props.booking.date ? (new Date(this.props.booking.date).toTimeString('en-us')).slice(0, 5) : "-- --" }</span>
           </td>
           <td>
             <select value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
               <option value="Booked">Booked</option>
               <option value="No Show">No Show</option>
               <option value="Cancelled">Cancelled</option>
+              <option value="En Route">En Route</option>
+              <option value="Picked Up">Picked Up</option>
               <option value="Dropped">Dropped</option>
             </select>
           </td>
@@ -203,10 +188,10 @@ class BookingRow extends React.Component {
           <span>{ this.props.booking.drop_off_address === "" ? "-- --"  : this.props.booking.drop_off_address }</span>
           </td>
           <td>
-            <span>{ this.props.booking.pick_up_time ? new Date(this.props.booking.pick_up_time).toLocaleTimeString('en-US', {timeZone: 'UTC'}) : "-- --" }</span>
+            <span>{ this.props.booking.pick_up_time ? (new Date(this.props.booking.pick_up_time).toTimeString('en-us')).slice(0, 5) : "-- --" }</span>
           </td>
           <td>
-            <span>{ this.props.booking.drop_off_time ? new Date(this.props.booking.drop_off_time).toLocaleTimeString('en-US', {timeZone: 'UTC'}) : "-- --" }</span>
+            <span>{ this.props.booking.drop_off_time ? (new Date(this.props.booking.drop_off_time).toTimeString('en-us')).slice(0, 5): "-- --" }</span>
           </td>
           <td>
             <button onClick={this.editBookingClick} className="editBooking">Edit Booking</button>
@@ -220,13 +205,11 @@ class BookingRow extends React.Component {
 
 }
 
-
 function mapDispatchToProps(dispatch){
   return { 
     updateBooking: (bookingId, obj) => dispatch(updateSingleBookingAction(bookingId, obj))
   }
 }
-
 
 export default connect(null, mapDispatchToProps)(BookingRow)
 

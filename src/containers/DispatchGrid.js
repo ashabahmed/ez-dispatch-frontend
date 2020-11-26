@@ -11,11 +11,8 @@ class DispatchGrid extends React.Component {
   
   bookingsbyDay = (currentDate) => {
     if(currentDate === undefined){
-      console.log("hello")
     } else {
       let todaysBookings = this.props.bookings.filter((booking) => {
-        console.log("current date", currentDate.toDateString())
-        console.log("")
         return currentDate.toDateString() === (new Date((booking.date))).toDateString()
       })
       return todaysBookings
@@ -24,14 +21,14 @@ class DispatchGrid extends React.Component {
 
   renderBookings = () => {
     let filteredBookings = this.bookingsbyDay(this.props.currentDate)
-
-    if(this.state.filter !== "Booked"){
-      filteredBookings = filteredBookings.filter(booking => booking.trip_status === this.state.filtered)
-      return filteredBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+    console.log(this.state.filtered)
+    if (this.state.filtered === "All"){
+    } else if (this.state.filtered === "Booked") {
+      filteredBookings = filteredBookings.filter(booking => ["Booked", "Picked Up", "En Route"].includes(booking.trip_status))
     } else {
-      return filteredBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+      filteredBookings = filteredBookings.filter(booking => booking.trip_status === this.state.filtered)
     }
-    
+    return filteredBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
   }
 
   updateFilter(type) {
@@ -49,6 +46,8 @@ class DispatchGrid extends React.Component {
               <option value="Booked">Booked</option>
               <option value="Dropped">Dropped</option>
               <option value="Cancelled">Cancelled</option>
+              <option value="Picked Up">Picked Up</option>
+              <option value="En Route">En Route</option>
               <option value="No Show">No Show</option>
               <option value="All">All</option>
             </select>

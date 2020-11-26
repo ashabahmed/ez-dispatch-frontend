@@ -17,7 +17,8 @@ function bookingsReducer(state = defaultState.bookings, action) {
       return [...state, action.payload];
     case "EDIT_BOOKING":
       let newArray = state.filter(booking => booking.id !== action.payload.id)
-      return [...newArray, action.payload]
+      return [...newArray, action.payload].sort((a,b) => a.date > b.date ? 1 : -1)
+
     default:
       return state;
   }
