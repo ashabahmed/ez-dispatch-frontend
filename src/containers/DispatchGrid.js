@@ -47,6 +47,7 @@ class DispatchGrid extends React.Component {
               <option value="Booked">Booked</option>
               <option value="Dropped">Dropped</option>
               <option value="Cancelled">Cancelled</option>
+              <option value="No Show">No Show</option>
               <option value="All">All</option>
             </select>
           </label>

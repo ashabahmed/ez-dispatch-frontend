@@ -14,7 +14,6 @@ class BookingRow extends React.Component {
   }
   
   componentDidMount(){
-    
     this.setState({ vehicleTypeBgColor: this.vehicleTypeBgColor() })
     this.setState({ trip_status: this.props.booking.trip_status })
     this.setState({ vehicle_type: this.props.booking.vehicle_type })
@@ -24,7 +23,6 @@ class BookingRow extends React.Component {
     if (this.props.booking.vehicle){
       this.setState({ vehicle_id: this.props.booking.vehicle.id })
     }
-    
   }
 
   bookingDriverChangeHandler = (e) => {
@@ -164,7 +162,7 @@ class BookingRow extends React.Component {
             <span onClick={this.clickHandler}>{ this.props.booking.id }</span>
           </td>
           <td style={ {backgroundColor: this.vehicleTypeBgColor()} }>
-          <select value={this.state.vehicle_type} onChange={this.vehicleTypeChangeHandler} name="vehicle_type">
+            <select value={this.state.vehicle_type} onChange={this.vehicleTypeChangeHandler} name="vehicle_type">
               <option value="Sedan">Sedan</option>
               <option value="SUV">SUV</option>
               <option value="Stretch Limo">Stretch Limo</option>
