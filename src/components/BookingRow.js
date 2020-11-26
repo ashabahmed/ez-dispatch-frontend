@@ -1,4 +1,7 @@
 import React, { Fragment } from 'react'
+import { connect } from 'react-redux'
+import { updateSingleBookingAction } from '../redux/actions';
+
 // import BookingDetailPage from './BookingDetailPage'
 
 
@@ -78,16 +81,8 @@ class BookingRow extends React.Component {
     let obj = {}
     obj[`${e.target.name }`] = e.target.value
 
-    fetch(`http://localhost:3000/bookings/${this.props.booking.id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json"
-      },
-      body: JSON.stringify(obj)
-    })
-    .then(resp => resp.json())
-    .then(data => this.setState({ vehicle_type: data.vehicle_type }))
+    this.props.updateBooking(this.props.booking.id, obj)
+    this.setState({ vehicle_type: e.target.value})
   }
 
 
@@ -225,6 +220,14 @@ class BookingRow extends React.Component {
 
 }
 
-export default BookingRow
+
+function mapDispatchToProps(dispatch){
+  return { 
+    updateBooking: (bookingId, obj) => dispatch(updateSingleBookingAction(bookingId, obj))
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(BookingRow)
 
 

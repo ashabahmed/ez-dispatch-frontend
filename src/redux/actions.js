@@ -81,3 +81,20 @@ export function editBookingAction(editedBookingObj) {
 
   };
 };
+
+export function updateSingleBookingAction(bookingId, obj) {
+  return function (dispatch) {
+    fetch(`http://localhost:3000/bookings/${bookingId}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(obj)
+    })
+      .then(resp => resp.json())
+      .then(payload => dispatch({ type: "EDIT_BOOKING", payload }))
+      .catch(console.log)
+
+  };
+};
