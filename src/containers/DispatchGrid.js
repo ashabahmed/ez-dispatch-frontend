@@ -6,7 +6,8 @@ import BookingRow from '../components/BookingRow'
 class DispatchGrid extends React.Component {
 
   state = {
-    filtered: "Booked"
+    filtered: "Booked",
+    searchValue: ""
   }
   
   bookingsbyDay = (currentDate) => {
@@ -21,14 +22,40 @@ class DispatchGrid extends React.Component {
 
   renderBookings = () => {
     let filteredBookings = this.bookingsbyDay(this.props.currentDate)
-    console.log(this.state.filtered)
     if (this.state.filtered === "All"){
     } else if (this.state.filtered === "Booked") {
       filteredBookings = filteredBookings.filter(booking => ["Booked", "Picked Up", "En Route"].includes(booking.trip_status))
     } else {
       filteredBookings = filteredBookings.filter(booking => booking.trip_status === this.state.filtered)
     }
-    return filteredBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+    return filteredBookings
+  }
+
+  handleSearchFilterRender = (masterBookings, searchText) => {
+    if (searchText === ""){
+      return masterBookings
+    } else {
+      let searchArray = searchText.split(",").map(e=> e.trim()).filter( e => e !=="")
+      return masterBookings.filter(booking => {
+        return searchArray.includes(`${booking.id}`) || 
+        searchArray.some( term => `${booking.account.name.toLowerCase()}`.includes(term))
+      })
+    }
+  }
+
+  masterBookingsRender = () => {
+    let masterBookings = this.renderBookings()
+    let searchText = this.state.searchValue.toLowerCase()
+    let renderList = this.handleSearchFilterRender(masterBookings, searchText)
+
+    masterBookings = renderList.sort((a,b) => a.date > b.date ? 1 : -1)
+    return masterBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
+  }
+
+
+  searchHandler = (e) => {
+    const search = e.target.value 
+    this.setState({ searchValue: search })
   }
 
   updateFilter(type) {
@@ -36,7 +63,7 @@ class DispatchGrid extends React.Component {
   }
 
   render(){
-    console.log(this.renderBookings())
+    console.log(this.state.searchValue)
     return(
       <>
         <div style={{ textAlign: "center" }}>
@@ -52,6 +79,9 @@ class DispatchGrid extends React.Component {
               <option value="All">All</option>
             </select>
           </label>
+          <div>
+            <input value={this.state.searchValue} onChange={this.searchHandler}/>
+          </div>
         </div>  
         <hr/>
         <div>
@@ -99,7 +129,7 @@ class DispatchGrid extends React.Component {
               </th>
             </tr>
             </thead>
-            <tbody>{this.renderBookings()}</tbody>
+            <tbody>{this.masterBookingsRender()}</tbody>
           </table>
         </div>
       </>
