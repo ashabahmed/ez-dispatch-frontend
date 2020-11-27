@@ -38,12 +38,13 @@ class DispatchGrid extends React.Component {
       let searchArray = searchText.split(",").map(e=> e.trim()).filter( e => e !=="")
       return masterBookings.filter(booking => {
         return searchArray.includes(`${booking.id}`) || 
-        searchArray.some( term => `${booking.account.name.toLowerCase()}`.includes(term))
+        searchArray.some( term => `${booking.account.name.toLowerCase()}`.includes(term)) ||
+        searchArray.some( term => `${booking.driver && booking.driver.name.toLowerCase()}`.includes(term))
       })
     }
   }
 
-  masterBookingsRender = () => {
+  mainBookingsRender = () => {
     let masterBookings = this.renderBookings()
     let searchText = this.state.searchValue.toLowerCase()
     let renderList = this.handleSearchFilterRender(masterBookings, searchText)
@@ -129,7 +130,7 @@ class DispatchGrid extends React.Component {
               </th>
             </tr>
             </thead>
-            <tbody>{this.masterBookingsRender()}</tbody>
+            <tbody>{this.mainBookingsRender()}</tbody>
           </table>
         </div>
       </>
