@@ -13,19 +13,21 @@ class BookingRow extends React.Component {
     trip_status: "Booked",
     vehicle_id: 0,
     vehicle_type: "-- --",
-    vehicleTypeBgColor: "white"
+    vehicleTypeBgColor: "white",
+    passenger_name: "",
+    date: ""
   }
   
   componentDidMount(){
-    this.setState({ vehicleTypeBgColor: this.vehicleTypeBgColor() })
-    this.setState({ trip_status: this.props.booking.trip_status })
-    this.setState({ vehicle_type: this.props.booking.vehicle_type })
-    if (this.props.booking.driver){
-      this.setState({ driver_id: this.props.booking.driver.id })
-    }
-    if (this.props.booking.vehicle){
-      this.setState({ vehicle_id: this.props.booking.vehicle.id })
-    }
+    this.setState({ 
+      vehicleTypeBgColor: this.vehicleTypeBgColor(), 
+      trip_status: this.props.booking.trip_status, 
+      vehicle_type: this.props.booking.vehicle_type,
+      passenger_name: this.props.booking.passenger_name,
+      date: this.props.booking.booking_datetime
+    })
+      this.props.booking.driver && this.setState({ driver_id: this.props.booking.driver.id })
+      this.props.booking.vehicle && this.setState({ vehicle_id: this.props.booking.vehicle.id })
   }
 
   bookingDriverChangeHandler = (e) => {
@@ -72,6 +74,15 @@ class BookingRow extends React.Component {
 
     this.props.updateBooking(this.props.booking.id, obj)
     this.setState({ vehicle_type: e.target.value })
+  }
+
+  passengerNameChangeHandler = (e) => {
+    let obj = {}
+    
+    obj[`${e.target.name }`] = e.target.value
+
+    this.props.updateBooking(this.props.booking.id, obj)
+    this.setState({ passenger_name: e.target.value })
   }
 
 
@@ -132,7 +143,7 @@ class BookingRow extends React.Component {
   }
 
   render(){
-    
+    console.log(this.props.booking.booking_datetime)
     return (
       <Fragment>
         <tr >
@@ -158,10 +169,8 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.account ? this.props.booking.account.name : "-- --" }</span>
           </td>
           <td>
-            {/* <span>{ this.props.booking.date ? new Date(Date.parse(this.props.booking.date)).toLocaleString('en-US', {timeZone: 'UTC'}) : "-- --" }</span> */}
-            <span>{ this.props.booking.date ? (new Date(this.props.booking.date).toDateString('en-us')).slice(4, 15) : "-- --" }</span>
-            <br/>
-            <span>{ this.props.booking.date ? (new Date(this.props.booking.date).toTimeString('en-us')).slice(0, 5) : "-- --" }</span>
+          <span>{ this.state.date.toString() }</span>
+          <input type="datetime-local" value={this.state.date} name='date' onChange={this.handleChange}/>
           </td>
           <td>
             <select value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
@@ -174,7 +183,7 @@ class BookingRow extends React.Component {
             </select>
           </td>
           <td>
-            <span>{ this.props.booking.passenger_name !== "" ?  this.props.booking.passenger_name : this.props.booking.account.name }</span>
+            <input value={ this.props.booking.passenger_name !== "" ?  this.props.booking.passenger_name : this.props.booking.account.name } name="passenger_name" onChange={this.passengerNameChangeHandler}/>
           </td>
           <td>
             <select value={this.state.driver_id} onChange={this.bookingDriverChangeHandler} name="driver_id">
@@ -188,10 +197,10 @@ class BookingRow extends React.Component {
           <span>{ this.props.booking.drop_off_address === "" ? "-- --"  : this.props.booking.drop_off_address }</span>
           </td>
           <td>
-            <span>{ this.props.booking.pick_up_time ? (new Date(this.props.booking.pick_up_time).toTimeString('en-us')).slice(0, 5) : "-- --" }</span>
+            <span>{ this.props.booking.pick_up_time ? (new Date(this.props.booking.pick_up_time).toTimeString()).slice(0, 5) : "-- --" }</span>
           </td>
           <td>
-            <span>{ this.props.booking.drop_off_time ? (new Date(this.props.booking.drop_off_time).toTimeString('en-us')).slice(0, 5): "-- --" }</span>
+            <span>{ this.props.booking.drop_off_time ? (new Date(this.props.booking.drop_off_time).toTimeString()).slice(0, 5): "-- --" }</span>
           </td>
           <td>
             <button onClick={this.editBookingClick} className="editBooking">Edit Booking</button>

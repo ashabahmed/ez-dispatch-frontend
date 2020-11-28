@@ -15,8 +15,12 @@ class BookingDetailPage extends React.Component {
   render(){
     
     return(
-    <h1>Booking show page for {this.gettingBooking().account.name}</h1>
-    )
+    <>
+      <h1>Booking show page for {this.gettingBooking().account.name}</h1>
+      <h3>{this.gettingBooking().date}</h3>
+    </> 
+      )
+  
   }
 }
 

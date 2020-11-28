@@ -35,8 +35,7 @@ class EditBookingForm extends React.Component {
       id: booking.id,
       account: booking.account.id,
       special_notes: booking.special_notes,
-      date: booking.booking_date,
-      pick_up_time: booking.booking_time,
+      date: booking.booking_datetime,
       passenger_name: booking.account.name,
       passenger_number: booking.account.number,
       vehicle_type: booking.vehicle_type,
@@ -85,9 +84,6 @@ class EditBookingForm extends React.Component {
           Scheduled Pick-up: 
           <input type="datetime-local" value={this.state.date} name='date' onChange={this.handleChange}/>
           <br/> <br/>
-          {/* Pick Up Time: 
-          <input type="time" value={this.state.pick_up_time} name='pick_up_time' onChange={this.handleChange}/>
-          <br/> <br/> */}
           Passengers: 
           <input type="text" value={this.state.passenger_name} name='passenger_name' onChange={this.handleChange}/>
           <br/> <br/>

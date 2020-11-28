@@ -13,9 +13,11 @@ class DispatchGrid extends React.Component {
   bookingsbyDay = (currentDate) => {
     if(currentDate === undefined){
     } else {
-      let todaysBookings = this.props.bookings.filter((booking) => {
-        return currentDate.toDateString() === (new Date((booking.date))).toDateString()
-      })
+      let changeThese = [...this.props.bookings]
+      for (const booking of changeThese){
+        booking.date = new Date(booking.date)
+      } 
+      let todaysBookings = changeThese.filter(booking => booking.date.toDateString() === currentDate.toDateString())
       return todaysBookings
     }
   }
@@ -64,7 +66,8 @@ class DispatchGrid extends React.Component {
   }
 
   render(){
-    console.log(this.state.searchValue)
+    console.log(this.props.bookings, "ORIGINAL ONES")
+    // console.log(this.mapDatesToLocale(), "PARSED ONES")
     return(
       <>
         <div style={{ textAlign: "center" }}>
