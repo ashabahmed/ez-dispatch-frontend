@@ -14,11 +14,10 @@ class DispatchGrid extends React.Component {
     if(currentDate === undefined){
     } else {
       let changeThese = [...this.props.bookings]
-      for (const booking of changeThese){
-        booking.date = new Date(booking.date)
-      } 
-      let todaysBookings = changeThese.filter(booking => booking.date.toDateString() === currentDate.toDateString())
-      return todaysBookings
+
+      let todaysBookings = changeThese.filter(booking => booking.date === currentDate.toDateString())
+      const sorted = todaysBookings.sort((a, b) => a.booking_datetime < b.booking_datetime ? 1 : -1)
+      return sorted
     }
   }
 

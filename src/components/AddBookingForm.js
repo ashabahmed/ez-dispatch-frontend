@@ -45,7 +45,7 @@ class AddBookingForm extends React.Component {
 
 
   render() {
-
+    console.log(this.state.date)
     return (
     <div style={{textAlign: "center"}} className="form-wrapper">
         <h1>Add Booking Form</h1>

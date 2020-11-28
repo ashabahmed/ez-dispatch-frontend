@@ -13,11 +13,12 @@ class BookingDetailPage extends React.Component {
   }
 
   render(){
-    
+    let booking = this.gettingBooking()
     return(
     <>
-      <h1>Booking show page for {this.gettingBooking().account.name}</h1>
-      <h3>{this.gettingBooking().date}</h3>
+      <h1>Booking show page for {booking.account.name}</h1>
+      <h3>{booking.date.toString()}</h3>
+      <h3>{booking.booking_datetime.toString()}</h3>
     </> 
       )
   

@@ -13,7 +13,6 @@ class BookingRow extends React.Component {
     trip_status: "Booked",
     vehicle_id: 0,
     vehicle_type: "-- --",
-    vehicleTypeBgColor: "white",
     passenger_name: "",
     date: ""
   }
@@ -85,6 +84,26 @@ class BookingRow extends React.Component {
     this.setState({ passenger_name: e.target.value })
   }
 
+  dateChangeHandler = e => {
+
+    let obj = {}
+    
+    obj[`${e.target.name }`] = e.target.value
+    
+    // this.props.updateBooking(this.props.booking.id, obj)
+    this.setState( {date: new Date(this.props.booking.booking_datetime)} )
+    
+  }
+
+  dateChangeSubmit = e => {
+    let obj = {}
+    
+    obj[`${e.target.name }`] = e.target.value
+    
+    this.props.updateBooking(this.props.booking.id, obj)
+  }
+
+
 
   driverNameOptions = () => {
     let fakeObj = {name: " "}
@@ -143,7 +162,7 @@ class BookingRow extends React.Component {
   }
 
   render(){
-    console.log(this.props.booking.booking_datetime)
+    // console.log(this.props.booking.booking_datetime)
     return (
       <Fragment>
         <tr >
@@ -169,8 +188,9 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.account ? this.props.booking.account.name : "-- --" }</span>
           </td>
           <td>
-          <span>{ this.state.date.toString() }</span>
-          <input type="datetime-local" value={this.state.date} name='date' onChange={this.handleChange}/>
+            <form>
+              <input type="datetime-local" value={this.state.date} name='date' onChange={this.dateChangeHandler} onBlur={this.dateChangeSubmit}/>
+            </form>
           </td>
           <td>
             <select value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">

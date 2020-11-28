@@ -69,7 +69,7 @@ class EditBookingForm extends React.Component {
 
 
   render() {
-    console.log(this.state.pick_up_time)
+    console.log(this.state.date)
     return (
       <div style={{textAlign: "center"}} className="form-wrapper">
         <h1>Edit Booking Form for Booking Number {this.gettingBooking().id}</h1>

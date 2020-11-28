@@ -14,12 +14,12 @@ function bookingsReducer(state = defaultState.bookings, action) {
     case "GET_BOOKINGS":
       return action.payload
     case "ADD_BOOKING":
-      return [...state, action.payload];
+      return [...state, action.payload]
     case "EDIT_BOOKING":
       let newArray = state.filter(booking => booking.id !== action.payload.id)
       return [...newArray, action.payload]
     default:
-      return state;
+      return state
   }
 };
 
