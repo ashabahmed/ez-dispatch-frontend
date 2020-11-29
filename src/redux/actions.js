@@ -78,7 +78,6 @@ export function editBookingAction(editedBookingObj) {
       .then(resp => resp.json())
       .then(payload => dispatch({ type: "EDIT_BOOKING", payload }))
       .catch(console.log)
-
   };
 };
 

@@ -14,13 +14,50 @@
   margin:  2rem;
 } */
 
+.modal-mask {
+  background-color: #0c0c0cc6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
+}
+
+.editBookingForm label {
+  width: 25%;
+  text-align: left;
+}
+
+.modal-thing {
+  background-color: #87857f;
+  color: black;
+  /* width: 1000px;
+  height: 1000px; */
+  position: absolute;
+  padding: 5% 15%;
+  top: 50%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 20px;
+  z-index: 1000;
+}
+
+.modal-thing h1 {
+  width: 100%;
+}
+
 table {
   margin: auto;
   width: 90%;
-  border: 3px solid rgb(1, 21, 1);
+  border: 6px solid rgb(1, 21, 1);
   padding: 10px;
-  border-collapse: separate;
-  border-spacing: 0 5px;
+  border-collapse: collapse;
+  border-spacing: auto;
 }
 
 th {
@@ -31,13 +68,17 @@ th {
 th, td {
   width: 150px;
   text-align: left;
-  border: 1px solid black;
-  padding: 5px;
+  border: 2px solid black;
+  padding: 7px;
 }
 
-h2 {
-  color: #4287f5;
-}
+
+/* tbody{
+  display:block;
+  overflow:auto;
+  height:200px;
+  width:100%;
+} */
 
 .navbar {
   margin: 10px;

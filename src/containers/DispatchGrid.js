@@ -54,7 +54,6 @@ class DispatchGrid extends React.Component {
     return masterBookings.map((booking) => <BookingRow vehicles={this.props.vehicles} drivers={this.props.drivers} routerProps={this.props.routerProps} key={booking.id} booking={booking}/>)
   }
 
-
   searchHandler = (e) => {
     const search = e.target.value 
     this.setState({ searchValue: search })
@@ -65,8 +64,7 @@ class DispatchGrid extends React.Component {
   }
 
   render(){
-    console.log(this.props.bookings, "ORIGINAL ONES")
-    // console.log(this.mapDatesToLocale(), "PARSED ONES")
+
     return(
       <>
         <div style={{ textAlign: "center" }}>

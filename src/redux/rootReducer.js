@@ -61,7 +61,6 @@ function vehiclesReducer(state = defaultState.vehicles, action) {
 };
 
 
-
 const rootReducer = combineReducers({
   bookings: bookingsReducer,
   drivers: driversReducer,

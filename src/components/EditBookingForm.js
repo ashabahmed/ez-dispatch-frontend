@@ -19,17 +19,17 @@ class EditBookingForm extends React.Component {
     internal_notes: ""
   }
 
-  gettingBooking = () => {
-    let id = parseInt(this.props.routerProps.match.params.id)
-    let foundBooking
-    if (this.props.bookings.length > 0 ) {
-      foundBooking = this.props.bookings.find(b => b.id === id)
-    }
-    return foundBooking
-  }
+  // gettingBooking = () => {
+  //   let id = parseInt(this.props.routerProps.match.params.id)
+  //   let foundBooking
+  //   if (this.props.bookings.length > 0 ) {
+  //     foundBooking = this.props.bookings.find(b => b.id === id)
+  //   }
+  //   return foundBooking
+  // }
 
   componentDidMount(){
-    let booking = this.gettingBooking()
+    let booking = this.props.booking
     
     this.setState({ 
       id: booking.id,
@@ -71,46 +71,51 @@ class EditBookingForm extends React.Component {
   render() {
     console.log(this.state.date)
     return (
-      <div style={{textAlign: "center"}} className="form-wrapper">
-        <h1>Edit Booking Form for Booking Number {this.gettingBooking().id}</h1>
-        <form onSubmit={this.handleSubmit} >
-          <label>
-            Select Account:
-            <select value={this.state.account} onChange={this.handleChange} name="account">
-              {this.accountNameOptions()}
-            </select>
-          </label>
+      <>
+      <div className='modal-mask' onClick={() => {this.props.closePopUp()}}>
+      </div> 
+        <div style={{textAlign: "center"}} className="modal-thing">
+          <h1>Edit Booking Form for Booking Number {this.props.booking.id}</h1>
+          <form className="editBookingForm" onSubmit={this.handleSubmit} >
+            <label>
+              Select Account:
+              <select value={this.state.account} onChange={this.handleChange} name="account">
+                {this.accountNameOptions()}
+              </select>
+            </label>
+            <br/> <br/>
+            Scheduled Pick-up: 
+            <input type="datetime-local" value={this.state.date} name='date' onChange={this.handleChange}/>
+            <br/> <br/>
+            Passengers: 
+            <input type="text" value={this.state.passenger_name} name='passenger_name' onChange={this.handleChange}/>
+            <br/> <br/>
+            Passengers Cell Number: 
+            <input type="text" value={this.state.passenger_number} name='passenger_number' onChange={this.handleChange}/>
+            <br/> <br/>
+            Vehicle Type:  
+            <input type="text" value={this.state.vehicle_type} name='vehicle_type' onChange={this.handleChange}/>
+            <br/> <br/>
+            Pick Up Address:  
+            <input type="text" value={this.state.pick_up_address} name='pick_up_address' onChange={this.handleChange}/>
+            <br/> <br/>
+            Drop Off Address:  
+            <input type="text" value={this.state.drop_off_address} name='drop_off_address' onChange={this.handleChange}/>
+            <br/> <br/>
+            Special Notes:  
+            <textarea rows="5" cols="28" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
+            <br/> <br/>
+            Internal Notes:  
+            <textarea rows="5" cols="28" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
+            <br/> <br/>
+            <button>Edit Booking</button>
+          </form>
           <br/> <br/>
-          Scheduled Pick-up: 
-          <input type="datetime-local" value={this.state.date} name='date' onChange={this.handleChange}/>
-          <br/> <br/>
-          Passengers: 
-          <input type="text" value={this.state.passenger_name} name='passenger_name' onChange={this.handleChange}/>
-          <br/> <br/>
-          Passengers Cell Number: 
-          <input type="text" value={this.state.passenger_number} name='passenger_number' onChange={this.handleChange}/>
-          <br/> <br/>
-          Vehicle Type:  
-          <input type="text" value={this.state.vehicle_type} name='vehicle_type' onChange={this.handleChange}/>
-          <br/> <br/>
-          Pick Up Address:  
-          <input type="text" value={this.state.pick_up_address} name='pick_up_address' onChange={this.handleChange}/>
-          <br/> <br/>
-          Drop Off Address:  
-          <input type="text" value={this.state.drop_off_address} name='drop_off_address' onChange={this.handleChange}/>
-          <br/> <br/>
-          Special Notes:  
-          <textarea rows="5" cols="28" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
-          <br/> <br/>
-          Internal Notes:  
-          <textarea rows="5" cols="28" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
-          <br/> <br/>
-          <button>Edit Booking</button>
-        </form>
-        <br/> <br/>
-      
-        <button onClick={this.clickHandler}>BACK</button>
-      </div>
+        
+          <button onClick={this.clickHandler}>BACK</button>
+        </div>
+        </>
+    
     )
   }
 }

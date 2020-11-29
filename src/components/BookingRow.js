@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { updateSingleBookingAction } from '../redux/actions';
+import EditBookingForm from './EditBookingForm';
 
 // import BookingDetailPage from './BookingDetailPage'
 
@@ -14,7 +15,8 @@ class BookingRow extends React.Component {
     vehicle_id: 0,
     vehicle_type: "-- --",
     passenger_name: "",
-    date: ""
+    date: "",
+    clicked: false
   }
   
   componentDidMount(){
@@ -103,17 +105,13 @@ class BookingRow extends React.Component {
     this.props.updateBooking(this.props.booking.id, obj)
   }
 
-
-
   driverNameOptions = () => {
-    let fakeObj = {name: " "}
-    let newArray = [fakeObj, ...this.props.drivers]
+    let newArray = [...this.props.drivers]
     return newArray.map((driver) => (<option key={driver.id} value={driver.id}>{driver.name}</option>))
   }
 
   vehicleNumberOptions = () => {
-    let fakeObj = {id: " "}
-    let newArray = [fakeObj, ...this.props.vehicles]
+    let newArray = [...this.props.vehicles]
     return newArray.map((vehicle) => (<option key={vehicle.id} value={vehicle.id}>{vehicle.id}</option>))
   }
 
@@ -122,7 +120,7 @@ class BookingRow extends React.Component {
   }
 
   editBookingClick = () => {
-    this.props.routerProps.history.push(`/edit-booking/${this.props.booking.id}`)
+    this.setState((previousState) => ({ clicked: !previousState.clicked }))
   }
 
   handleChange = (e) => {
@@ -161,10 +159,14 @@ class BookingRow extends React.Component {
     }
   }
 
+  closePopUp = () => {
+    this.setState((previousState) => ({ clicked: !previousState.clicked }))
+  }
+
   render(){
-    // console.log(this.props.booking.booking_datetime)
     return (
       <Fragment>
+        {this.state.clicked ? <EditBookingForm routerProps={this.props.routerProps} booking={this.props.booking} closePopUp={this.closePopUp}/> : null}
         <tr >
           <td>
             <span onClick={this.clickHandler}>{ this.props.booking.id }</span>
@@ -181,11 +183,12 @@ class BookingRow extends React.Component {
           </td>
           <td>
             <select value={this.state.vehicle_id} onChange={this.bookingVehicleNumberChangeHandler} name="vehicle_id">
+              <option value="--">- -</option>
               {this.vehicleNumberOptions()}
             </select>
           </td>
-          <td>
-            <span>{ this.props.booking.account ? this.props.booking.account.name : "-- --" }</span>
+          <td >
+            <span >{ this.props.booking.account ? this.props.booking.account.name : "-- --" }</span>
           </td>
           <td>
             <form>
@@ -207,6 +210,7 @@ class BookingRow extends React.Component {
           </td>
           <td>
             <select value={this.state.driver_id} onChange={this.bookingDriverChangeHandler} name="driver_id">
+              <option value="--">- - - - -</option>
               {this.driverNameOptions()}
             </select>
           </td>
@@ -227,11 +231,9 @@ class BookingRow extends React.Component {
           </td>
   
         </tr>
-        
       </Fragment>
     )
   }
-
 }
 
 function mapDispatchToProps(dispatch){
