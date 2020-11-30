@@ -61,7 +61,7 @@ class BookingRow extends React.Component {
         obj["drop_off_time"] = new Date()
         break
       default: 
-        return obj
+        obj[`${e.target.name }`] = e.target.value
     }
 
     this.props.updateBooking(this.props.booking.id, obj)
@@ -92,18 +92,18 @@ class BookingRow extends React.Component {
     
     obj[`${e.target.name }`] = e.target.value
     
-    // this.props.updateBooking(this.props.booking.id, obj)
+    this.props.updateBooking(this.props.booking.id, obj)
     this.setState( {date: new Date(this.props.booking.booking_datetime)} )
     
   }
 
-  dateChangeSubmit = e => {
-    let obj = {}
+  // dateChangeSubmit = e => {
+  //   let obj = {}
     
-    obj[`${e.target.name }`] = e.target.value
+  //   obj[`${e.target.name }`] = e.target.value
     
-    this.props.updateBooking(this.props.booking.id, obj)
-  }
+  //   this.props.updateBooking(this.props.booking.id, obj)
+  // }
 
   driverNameOptions = () => {
     let newArray = [...this.props.drivers]
@@ -146,19 +146,6 @@ class BookingRow extends React.Component {
     }
   }
 
-  bookingStatusBgColor = () => {
-    switch (this.props.booking.trip_status) {
-      case "No Show":
-        return "red"
-      case "Cancelled":
-        return "gray"
-      case "Dropped":
-        return "pink"
-      default:
-        return "white";
-    }
-  }
-
   closePopUp = () => {
     this.setState((previousState) => ({ clicked: !previousState.clicked }))
   }
@@ -192,7 +179,7 @@ class BookingRow extends React.Component {
           </td>
           <td>
             <form>
-              <input type="datetime-local" value={this.state.date} name='date' onChange={this.dateChangeHandler} onBlur={this.dateChangeSubmit}/>
+              <input type="datetime-local" value={this.props.booking.booking_datetime} name='date' onChange={this.dateChangeHandler} />
             </form>
           </td>
           <td>

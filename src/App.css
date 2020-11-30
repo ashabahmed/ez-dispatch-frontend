@@ -14,6 +14,12 @@
   margin:  2rem;
 } */
 
+body {
+  background-color: #b2cccc;
+  background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
+}
+
+
 .modal-mask {
   background-color: #0c0c0cc6;
   position: fixed;
@@ -21,7 +27,6 @@
   left: 0;
   height: 100vh;
   width: 100vw;
-  z-index: 100;
 }
 
 .editBookingForm label {
@@ -37,14 +42,14 @@
   position: absolute;
   padding: 5% 15%;
   top: 50%;
-  left: 47%;
+  left: 50%;
   transform: translate(-50%, -50%);
   /* display: flex; */
   align-items: center;
   justify-content: center;
   text-align: center;
   border-radius: 20px;
-  z-index: 1000;
+
 }
 
 .modal-thing h1 {
@@ -54,10 +59,11 @@
 table {
   margin: auto;
   width: 90%;
-  border: 6px solid rgb(1, 21, 1);
+  /* border: 6px solid rgb(1, 21, 1); */
   padding: 10px;
   border-collapse: collapse;
   border-spacing: auto;
+  
 }
 
 th {
@@ -66,18 +72,38 @@ th {
 }
 
 th, td {
-  width: 150px;
-  text-align: left;
-  border: 2px solid black;
+  /* max-width: 200px ;
+  min-width: 100px; */
+  text-align: center;
+  
+  border-bottom: 2px solid grey;
+  border-left: 2px solid grey;
+  border-right: 2px solid grey;
   padding: 7px;
 }
 
+.sticky-column {
+  position: sticky;
+  top: 0
+}
+
+.dispatchGrid {
+  border: 1px solid #eeccee;
+  max-height: 600px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+thead {
+  /* display: block; */
+  margin-top: 20px solid black;
+}
 
 /* tbody{
   display:block;
-  overflow:auto;
-  height:200px;
+  height:90%;
   width:100%;
+  overflow-y: auto;
 } */
 
 .navbar {

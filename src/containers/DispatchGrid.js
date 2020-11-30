@@ -85,53 +85,53 @@ class DispatchGrid extends React.Component {
           </div>
         </div>  
         <hr/>
-        <div>
+        <div className="dispatchGrid" >
           <table style={{textAlign: "center"}}>
-            <thead style={{textAlign: "center"}}>
+            <thead style={{textAlign: "center"}} className="sticky-column">
             <tr>
-              <th >
-                Booking No.
+              <th className="sticky-column">Booking No.
               </th>
-              <th>
+              <th className="sticky-column">
                 Vehicle Type
               </th>
-              <th>
+              <th className="sticky-column">
                 Vehicle No.
               </th>
-              <th>
+              <th className="sticky-column">
                 Account Name
               </th>
-              <th>
+              <th className="sticky-column">
                 Scheduled Pick-up
               </th>
-              <th>
+              <th className="sticky-column">
                 Status
               </th>
-              <th>
+              <th className="sticky-column">
                 Passengers
               </th>
-              <th>
+              <th className="sticky-column">
                 Driver
               </th>
-              <th>
+              <th className="sticky-column">
                 Pick-up Point
               </th>
-              <th>
+              <th className="sticky-column">
                 Drop-off Point
               </th>
-              <th>
+              <th className="sticky-column">
                 Pick-up Time
               </th>
-              <th>
+              <th className="sticky-column">
                 Drop-off Time
               </th>
-              <th>
+              <th className="sticky-column">
                 Edit?
               </th>
             </tr>
             </thead>
             <tbody>{this.mainBookingsRender()}</tbody>
           </table>
+          
         </div>
       </>
     )

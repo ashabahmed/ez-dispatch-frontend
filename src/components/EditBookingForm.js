@@ -69,13 +69,12 @@ class EditBookingForm extends React.Component {
 
 
   render() {
-    console.log(this.state.date)
     return (
       <>
       <div className='modal-mask' onClick={() => {this.props.closePopUp()}}>
       </div> 
         <div style={{textAlign: "center"}} className="modal-thing">
-          <h1>Edit Booking Form for Booking Number {this.props.booking.id}</h1>
+          <h1>Edit Booking Number {this.props.booking.id}</h1>
           <form className="editBookingForm" onSubmit={this.handleSubmit} >
             <label>
               Select Account:
