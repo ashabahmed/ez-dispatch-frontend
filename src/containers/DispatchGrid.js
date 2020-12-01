@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import BookingRow from '../components/BookingRow'
+
 // import BookingDetailPage from '../components/BookingDetailPage'
 
 class DispatchGrid extends React.Component {
@@ -131,7 +132,6 @@ class DispatchGrid extends React.Component {
             </thead>
             <tbody>{this.mainBookingsRender()}</tbody>
           </table>
-          
         </div>
       </>
     )
