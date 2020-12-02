@@ -82,7 +82,7 @@ class DispatchGrid extends React.Component {
             </select>
           </label>
           <div>
-            <input value={this.state.searchValue} onChange={this.searchHandler}/>
+            <input placeholder="Search Booking" className="searchBar" value={this.state.searchValue} onChange={this.searchHandler}/>
           </div>
         </div>  
         <hr/>
@@ -102,7 +102,7 @@ class DispatchGrid extends React.Component {
                 Account Name
               </th>
               <th className="sticky-column">
-                Scheduled Pick-up
+                Scheduled Time
               </th>
               <th className="sticky-column">
                 Status
@@ -114,19 +114,22 @@ class DispatchGrid extends React.Component {
                 Driver
               </th>
               <th className="sticky-column">
-                Pick-up Point
+                P/U Point
               </th>
               <th className="sticky-column">
-                Drop-off Point
+                D/O Point
               </th>
               <th className="sticky-column">
-                Pick-up Time
+                P/U Time
               </th>
               <th className="sticky-column">
-                Drop-off Time
+                D/O Time
               </th>
               <th className="sticky-column">
-                Edit?
+                Notes
+              </th>
+              <th className="sticky-column">
+                Edit
               </th>
             </tr>
             </thead>

@@ -57,17 +57,17 @@ class BookingDetailPage extends React.Component {
   //   })
   // }
 
-  gettingBooking = () => {
-    let id = parseInt(this.props.routerProps.match.params.id)
-    let foundBooking
-    if (this.props.bookings.length > 0 ) {
-      foundBooking = this.props.bookings.find(b => b.id === id)
-    }
-    return foundBooking
-  }
+  // gettingBooking = () => {
+  //   let id = parseInt(this.props.routerProps.match.params.id)
+  //   let foundBooking
+  //   if (this.props.bookings.length > 0 ) {
+  //     foundBooking = this.props.bookings.find(b => b.id === id)
+  //   }
+  //   return foundBooking
+  // }
 
   apiOnClick = () => {
-    let booking = this.gettingBooking()
+    let booking = this.props.booking
     fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${booking.pick_up_address}&destination=${booking.drop_off_address}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
     .then(resp => resp.json())
     .then(resp => {
@@ -111,23 +111,39 @@ class BookingDetailPage extends React.Component {
 
   render(){
     console.log(this.state)
-    if (this.gettingBooking() === undefined) {
-      return (<h1>LOADING</h1>)
+  
+
+    if (this.props.booking === undefined) {
+      return (
+        <>
+          <div className='modal-mask' onClick={() => {this.props.detailClosePopUp()}}>
+          </div> 
+          <h1>LOADING</h1>
+        </>
+      )
+
     } else {
-      let booking = this.gettingBooking()
+      let booking = this.props.booking
       return(
         <>
-          <h1>Booking show page for {booking.account.name}</h1>
-          <h3>{booking.date.toString()}</h3>
-          <h3>{booking.booking_datetime.toString()}</h3>
-          <h3>Pick Up Address: {booking.pick_up_address}</h3>
-          <h3>Drop Off Address: {booking.drop_off_address}</h3>
-          <button onClick={this.apiOnClick}>checking api</button>
-          <h4>
-            { booking.location_point && `Distance: ${booking.location_point.distance}
-            Duration: ${booking.location_point.duration}`}
-          </h4> 
-          <div>{booking.location_point && <Demo1 booking={booking} pickUpLat={booking.location_point.pick_up_latitude}  pickUpLong={booking.location_point.pick_up_longitude} dropOffLat={booking.location_point.drop_off_latitude} dropOffLong={booking.location_point.drop_off_longitude}/>}</div>
+          <div className='modal-mask' onClick={() => {this.props.detailClosePopUp()}}>
+          </div> 
+          <div className="modal-thing">
+            <h1>Details for Booking No.{booking.id}</h1>
+            <h3>{booking.date.toString()}</h3>
+            <h3>{booking.booking_datetime.toString()}</h3>
+            <h3>Pick Up Address: {booking.pick_up_address}</h3>
+            <h3>Drop Off Address: {booking.drop_off_address}</h3>
+            <button onClick={this.apiOnClick}>checking api</button>
+            <h4>
+              { booking.location_point && `Distance: ${booking.location_point.distance}
+              Duration: ${booking.location_point.duration}`}
+            </h4> 
+            <div>
+              {booking.location_point && <Demo1 booking={booking} pickUpLat={booking.location_point.pick_up_latitude}  
+              pickUpLong={booking.location_point.pick_up_longitude} dropOffLat={booking.location_point.drop_off_latitude} dropOffLong={booking.location_point.drop_off_longitude}/>}
+            </div>
+          </div>
         </> 
       )
     }

@@ -55,6 +55,7 @@ class AddBookingForm extends React.Component {
             <label>
               Select Account:
               <select value={this.state.account} onChange={this.handleChange} name="account">
+                <option value="--">- - - - -</option>
                 {this.accountNameOptions()}
               </select>
             </label>

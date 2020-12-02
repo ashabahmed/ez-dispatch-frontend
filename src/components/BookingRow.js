@@ -2,8 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { updateSingleBookingAction } from '../redux/actions';
 import EditBookingForm from './EditBookingForm';
-
-// import BookingDetailPage from './BookingDetailPage'
+import BookingDetailPage from './BookingDetailPage'
 
 
 class BookingRow extends React.Component {
@@ -16,7 +15,8 @@ class BookingRow extends React.Component {
     vehicle_type: "-- --",
     passenger_name: "",
     date: "",
-    clicked: false
+    clicked: false,
+    detailClicked: false
   }
   
   componentDidMount(){
@@ -97,7 +97,6 @@ class BookingRow extends React.Component {
     
   }
 
-
   driverNameOptions = () => {
     let newArray = [...this.props.drivers]
     return newArray.map((driver) => (<option key={driver.id} value={driver.id}>{driver.name}</option>))
@@ -105,11 +104,11 @@ class BookingRow extends React.Component {
 
   vehicleNumberOptions = () => {
     let newArray = [...this.props.vehicles]
-    return newArray.map((vehicle) => (<option key={vehicle.id} value={vehicle.id}>{vehicle.id}</option>))
+  return newArray.map((vehicle) => (<option key={vehicle.id} value={vehicle.id}>{vehicle.id} - {vehicle.vehicle_type} - {vehicle.year}</option>))
   }
 
   clickHandler = () => {
-    this.props.routerProps.history.push(`/bookings/${this.props.booking.id}`)
+    this.setState((previousState) => ({ detailClicked: !previousState.detailClicked }))
   }
 
   editBookingClick = () => {
@@ -158,14 +157,18 @@ class BookingRow extends React.Component {
     this.setState((previousState) => ({ clicked: !previousState.clicked }))
   }
 
+  detailClosePopUp = () => {
+    this.setState((previousState) => ({ detailClicked: !previousState.detailClicked  }))
+  }
+
   render(){
     return (
       <Fragment>
         {this.state.clicked ? <EditBookingForm routerProps={this.props.routerProps} booking={this.props.booking} closePopUp={this.closePopUp}/> : null}
+        {this.state.detailClicked ? <BookingDetailPage routerProps={this.props.routerProps} booking={this.props.booking} detailClosePopUp={this.detailClosePopUp}/> : null}
         <tr className={this.tripStatusStyleChange()}>
-          <td onClick={this.clickHandler}>
+          <td className="bookingIdClick" onClick={this.clickHandler}>
             <div >{ this.props.booking.id }</div>
-
           </td>
           <td style={ {backgroundColor: this.vehicleTypeBgColor()} }>
             <select value={this.state.vehicle_type} onChange={this.vehicleTypeChangeHandler} name="vehicle_type">
@@ -178,8 +181,8 @@ class BookingRow extends React.Component {
             </select>
           </td>
           <td>
-            <select value={this.state.vehicle_id} onChange={this.bookingVehicleNumberChangeHandler} name="vehicle_id">
-              <option value="--">- -</option>
+            <select style={{ textAlign: "center" }} value={this.state.vehicle_id} onChange={this.bookingVehicleNumberChangeHandler} name="vehicle_id">
+              <option value="- - - -">- - - -</option>
               {this.vehicleNumberOptions()}
             </select>
           </td>
@@ -192,7 +195,7 @@ class BookingRow extends React.Component {
             </form>
           </td>
           <td>
-            <select   value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
+            <select value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
               <option value="Booked">Booked</option>
               <option value="No Show">No Show</option>
               <option value="Cancelled">Cancelled</option>
@@ -221,6 +224,9 @@ class BookingRow extends React.Component {
           </td>
           <td>
             <span>{ this.props.booking.drop_off_time ? (new Date(this.props.booking.drop_off_time).toTimeString()).slice(0, 5): "-- --" }</span>
+          </td>
+          <td>
+            <div>🗒</div>
           </td>
           <td>
             <button onClick={this.editBookingClick} className="editBooking">Update Booking</button>

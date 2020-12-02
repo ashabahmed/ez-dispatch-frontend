@@ -63,7 +63,6 @@ class EditBookingForm extends React.Component {
     this.props.closePopUp()
   }
 
-
   render() {
     return (
       <>
