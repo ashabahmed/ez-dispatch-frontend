@@ -65,7 +65,7 @@ class DispatchGrid extends React.Component {
   }
 
   render(){
-
+    console.log(this.mainBookingsRender().length)
     return(
       <>
         <div style={{ textAlign: "center" }}>
@@ -129,13 +129,14 @@ class DispatchGrid extends React.Component {
                 Notes
               </th>
               <th className="sticky-column">
-                Edit
+                Edit/View
               </th>
             </tr>
             </thead>
             <tbody>{this.mainBookingsRender()}</tbody>
           </table>
         </div>
+        <p style={{ textAlign: "center" }}> <b>Total Reservations: {this.mainBookingsRender().length}</b></p>
       </>
     )
   }

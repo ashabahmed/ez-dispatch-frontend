@@ -18,7 +18,7 @@ class Demo1 extends Component {
   render() {
     console.log(this.props)
     return (
-      <div>
+      <div className="mapDiv">
         <Map
           google={this.props.google}
           zoom={10}

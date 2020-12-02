@@ -229,7 +229,7 @@ class BookingRow extends React.Component {
             <div>🗒</div>
           </td>
           <td>
-            <button onClick={this.editBookingClick} className="editBooking">Update Booking</button>
+            <button className="button1" onClick={this.editBookingClick} >Edit/View</button>
           </td>
   
         </tr>

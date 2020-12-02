@@ -128,18 +128,22 @@ class BookingDetailPage extends React.Component {
         <>
           <div className='modal-mask' onClick={() => {this.props.detailClosePopUp()}}>
           </div> 
-          <div className="modal-thing">
-            <h1>Details for Booking No.{booking.id}</h1>
+          <div className="modal-thing columns">
+            <h1 className="detailHeader">Details for Booking No.{booking.id}</h1>
             <h3>{booking.date.toString()}</h3>
             <h3>{booking.booking_datetime.toString()}</h3>
-            <h3>Pick Up Address: {booking.pick_up_address}</h3>
-            <h3>Drop Off Address: {booking.drop_off_address}</h3>
-            <button onClick={this.apiOnClick}>checking api</button>
+            <div className="leftSide">
+              <h3 >Pick Up Address: {booking.pick_up_address}</h3>
+            </div>
+            <div className="rightSide">
+              <h3>Drop Off Address: {booking.drop_off_address}</h3>
+            </div>
+            <button onClick={this.apiOnClick}>Load Map</button>
             <h4>
               { booking.location_point && `Distance: ${booking.location_point.distance}
               Duration: ${booking.location_point.duration}`}
             </h4> 
-            <div>
+            <div className="modal-thing columns">
               {booking.location_point && <Demo1 booking={booking} pickUpLat={booking.location_point.pick_up_latitude}  
               pickUpLong={booking.location_point.pick_up_longitude} dropOffLat={booking.location_point.drop_off_latitude} dropOffLong={booking.location_point.drop_off_longitude}/>}
             </div>
