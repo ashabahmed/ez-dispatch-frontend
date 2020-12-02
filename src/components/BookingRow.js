@@ -163,8 +163,9 @@ class BookingRow extends React.Component {
       <Fragment>
         {this.state.clicked ? <EditBookingForm routerProps={this.props.routerProps} booking={this.props.booking} closePopUp={this.closePopUp}/> : null}
         <tr className={this.tripStatusStyleChange()}>
-          <td>
-            <span onClick={this.clickHandler}>{ this.props.booking.id }</span>
+          <td onClick={this.clickHandler}>
+            <div >{ this.props.booking.id }</div>
+
           </td>
           <td style={ {backgroundColor: this.vehicleTypeBgColor()} }>
             <select value={this.state.vehicle_type} onChange={this.vehicleTypeChangeHandler} name="vehicle_type">
