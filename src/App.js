@@ -4,12 +4,11 @@ import Header from './components/Header'
 import { connect } from 'react-redux'
 import { fetchBookingsAction, fetchDriversAction, fetchDispatchersAction, fetchVehiclesAction } from './redux/actions'
 import { BrowserRouter, Route, Switch } from "react-router-dom"
-import NavBar from './components/NavBar'
+
 import BookingDetailPage from './components/BookingDetailPage'
 import Login from './components/Login'
 import AddBookingForm from './components/AddBookingForm'
 
-// let API_KEY = 
 
 class App extends React.Component {
   
@@ -35,11 +34,10 @@ class App extends React.Component {
 
 
   render () {
-    console.log(process.env.REACT_APP_GOOGLE_API_KEY)
+    
     return (
       <>
       <BrowserRouter>
-        <NavBar />
         <Switch>
           <Route path='/bookings/:id' render={ routerProps =>  <BookingDetailPage routerProps={routerProps}/> } />   
           <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />

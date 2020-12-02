@@ -97,13 +97,6 @@ class BookingRow extends React.Component {
     
   }
 
-  // dateChangeSubmit = e => {
-  //   let obj = {}
-    
-  //   obj[`${e.target.name }`] = e.target.value
-    
-  //   this.props.updateBooking(this.props.booking.id, obj)
-  // }
 
   driverNameOptions = () => {
     let newArray = [...this.props.drivers]
@@ -130,19 +123,34 @@ class BookingRow extends React.Component {
   vehicleTypeBgColor = () => {
     switch (this.props.booking.vehicle_type) {
       case "Sedan":
-        return "blue"
+        return "NavajoWhite"
       case "SUV":
-        return "purple"
+        return "LightSteelBlue"
       case "Stretch Limo":
-        return "pink"
+        return "Plum"
       case "Luxury Van":
-        return "orange"
+        return "RosyBrown"
       case "Cargo Van":
-        return "yellow"
+        return "Gainsboro"
       case "Extended SUV":
-        return "green" 
+        return "IndianRed" 
       default:
         return "white";
+    }
+  }
+
+  tripStatusStyleChange = () => {
+    switch (this.props.booking.trip_status) {
+      case "Dropped":
+        return "droppedStatus"
+      case "No Show":
+        return "noShowStatus"
+      case "Cancelled":
+        return "cancelledStatus"
+      case "Picked Up":
+        return "pickedUpStatus"
+      default:
+        return "defaultStatus";
     }
   }
 
@@ -154,7 +162,7 @@ class BookingRow extends React.Component {
     return (
       <Fragment>
         {this.state.clicked ? <EditBookingForm routerProps={this.props.routerProps} booking={this.props.booking} closePopUp={this.closePopUp}/> : null}
-        <tr >
+        <tr className={this.tripStatusStyleChange()}>
           <td>
             <span onClick={this.clickHandler}>{ this.props.booking.id }</span>
           </td>
@@ -183,7 +191,7 @@ class BookingRow extends React.Component {
             </form>
           </td>
           <td>
-            <select value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
+            <select   value={this.state.trip_status} onChange={this.bookingTripStatusChangeHandler} name="trip_status">
               <option value="Booked">Booked</option>
               <option value="No Show">No Show</option>
               <option value="Cancelled">Cancelled</option>
@@ -214,7 +222,7 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.drop_off_time ? (new Date(this.props.booking.drop_off_time).toTimeString()).slice(0, 5): "-- --" }</span>
           </td>
           <td>
-            <button onClick={this.editBookingClick} className="editBooking">Edit Booking</button>
+            <button onClick={this.editBookingClick} className="editBooking">Update Booking</button>
           </td>
   
         </tr>

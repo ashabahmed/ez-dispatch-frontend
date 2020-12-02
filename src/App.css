@@ -15,8 +15,9 @@
 } */
 
 body {
-  background-color: #b2cccc;
-  background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
+  background-color: #fffefa;
+  background-image: url("https://www.transparenttextures.com/patterns/grey-washed-wall.png");
+  font-size: .8em;
 }
 
 
@@ -63,23 +64,46 @@ table {
   padding: 10px;
   border-collapse: collapse;
   border-spacing: auto;
+  border-radius: 20px;
   
 }
 
+.droppedStatus{
+  background-color: rgba(144, 181, 236, 0.9);
+}
+
+.noShowStatus{
+  background-color: rgba(240, 144, 168, 0.6);
+  
+}
+
+.pickedUpStatus{
+  background-color: rgba(171, 226, 145, 0.6);
+  
+}
+
+.cancelledStatus{
+  background-color: rgba(46, 46, 43, 0.6);
+  text-decoration: line-through;
+}
+
+
 th {
-  background-color: #4287f5;
+  background-color: #234880;
   color: white;
 }
 
 th, td {
-  /* max-width: 200px ;
-  min-width: 100px; */
   text-align: center;
   
-  border-bottom: 2px solid grey;
-  border-left: 2px solid grey;
-  border-right: 2px solid grey;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
   padding: 7px;
+}
+
+.defaultStatus{
+  background-color: rgba(248, 248, 236, 0.8);
 }
 
 .sticky-column {
@@ -88,7 +112,6 @@ th, td {
 }
 
 .dispatchGrid {
-  border: 1px solid #eeccee;
   max-height: 600px;
   overflow-y: scroll;
   width: 100%;

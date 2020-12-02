@@ -13,20 +13,6 @@ class BookingDetailPage extends React.Component {
     bookingDropOff: ""
   }
 
-  componentDidMount() {
-    this.delayedShowMarker()
-  }
-
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({ isMarkerShown: true })
-    }, 3000)
-  }
-
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false })
-    this.delayedShowMarker()
-  }
 
   // componentDidMount(){
 
@@ -60,12 +46,15 @@ class BookingDetailPage extends React.Component {
   // }
 
   // componentDidMount(){
-  //   pickUpLat: 0,
-  //   pickUpLong: 0,
-  //   dropOffLat:0,
-  //   dropOffLong: 0,
-  //   bookingPickUp: "",
-  //   bookingDropOff: ""
+  //   if(this.props.bookings.location_point){
+
+  //   }
+  //   this.setState({
+  //     pickUpLat: this.props.bookings.location_point.pick_up_latitude,
+  //     pickUpLong: this.props.bookings.location_point.pick_up_longitude,
+  //     dropOffLat:this.props.bookings.location_point.drop_off_latitude,
+  //     dropOffLong: this.props.bookings.location_point.drop_off_longitude
+  //   })
   // }
 
   gettingBooking = () => {
@@ -81,18 +70,26 @@ class BookingDetailPage extends React.Component {
     let booking = this.gettingBooking()
     fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${booking.pick_up_address}&destination=${booking.drop_off_address}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
     .then(resp => resp.json())
-    .then(test => {
-      console.log("tr", test["routes"]["0"]["legs"]["0"])
-      let endLocation = test["routes"]["0"]["legs"]["0"]["end_location"]
-      let startLocation = test["routes"]["0"]["legs"]["0"]["start_location"]
+    .then(resp => {
+      console.log("tr", resp["routes"]["0"]["legs"]["0"]["distance"]["text"])
       let obj = {}
-      obj["pick_up_longitude"] = startLocation.lng
-      obj["pick_up_latitude"] = startLocation.lat
-      obj["drop_off_longitude"] = endLocation.lng
-      obj["drop_off_latitude"] = endLocation.lat
-      obj["location_found"] = true
+      if (resp['status'] === "OK"){
+        obj["location_found"] = true
+        let endLocation = resp["routes"]["0"]["legs"]["0"]["end_location"]
+        let startLocation = resp["routes"]["0"]["legs"]["0"]["start_location"]
+  
+        obj["pick_up_longitude"] = startLocation.lng
+        obj["pick_up_latitude"] = startLocation.lat
+        obj["drop_off_longitude"] = endLocation.lng
+        obj["drop_off_latitude"] = endLocation.lat
+        
+        obj["distance"] = resp["routes"]["0"]["legs"]["0"]["distance"]["text"]
+        obj["duration"] = resp["routes"]["0"]["legs"]["0"]["duration"]["text"]
+      } else {
+        obj["location_found"] = false
+      }
 
-      console.log(endLocation.lat, startLocation)
+    
       fetch("http://localhost:3000/bookings/update_booking_location",{
         method: "POST",
         headers: {
@@ -108,6 +105,7 @@ class BookingDetailPage extends React.Component {
         dropOffLat: parseFloat(booking.location_point.drop_off_latitude),
         dropOffLong: parseFloat(booking.location_point.drop_off_longitude)
       })})
+      
     })
   }
 
@@ -125,12 +123,14 @@ class BookingDetailPage extends React.Component {
           <h3>Pick Up Address: {booking.pick_up_address}</h3>
           <h3>Drop Off Address: {booking.drop_off_address}</h3>
           <button onClick={this.apiOnClick}>checking api</button>
-
-          <div>{booking.location_point && < Demo1 pickUpLat={booking.location_point.pick_up_latitude}  pickUpLong={booking.location_point.pick_up_longitude} dropOffLat={booking.location_point.drop_off_latitude} dropOffLong={booking.location_point.drop_off_longitude}/>}</div>
+          <h4>
+            { booking.location_point && `Distance: ${booking.location_point.distance}
+            Duration: ${booking.location_point.duration}`}
+          </h4> 
+          <div>{booking.location_point && <Demo1 booking={booking} pickUpLat={booking.location_point.pick_up_latitude}  pickUpLong={booking.location_point.pick_up_longitude} dropOffLat={booking.location_point.drop_off_latitude} dropOffLong={booking.location_point.drop_off_longitude}/>}</div>
         </> 
       )
     }
-  
   }
 }
 

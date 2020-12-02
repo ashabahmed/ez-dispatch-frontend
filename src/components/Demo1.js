@@ -18,7 +18,7 @@ class Demo1 extends Component {
   render() {
     console.log(this.props)
     return (
-    <div>
+      <div>
         <Map
           google={this.props.google}
           zoom={10}
@@ -28,16 +28,16 @@ class Demo1 extends Component {
             lng: this.props.pickUpLong
           }}
         >
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'pick up test'}
-          position={{lat: this.props.pickUpLat, lng: this.props.pickUpLong}} 
-        />
-        <Marker />
-        <Marker
-          name={'drop off test'}
-          position={{lat: this.props.dropOffLat, lng: this.props.dropOffLong}} />
-        <Marker />
+          <Marker
+            onClick={this.onMarkerClick}
+            name={'pick up test'}
+            position={{lat: this.props.pickUpLat, lng: this.props.pickUpLong}} 
+          />
+          <Marker />
+          <Marker
+            name={'drop off test'}
+            position={{lat: this.props.dropOffLat, lng: this.props.dropOffLong}} />
+          <Marker />
         </Map>
     </div>
     );
