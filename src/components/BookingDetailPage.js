@@ -2,17 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Demo1 from './Demo1'
 
-
 class BookingDetailPage extends React.Component {
 
-  state={
+  state= {
     pickUpLat: 0,
     pickUpLong: 0,
     dropOffLat:0,
     dropOffLong: 0,
     bookingPickUp: "",
-    bookingDropOff: "",
-    isMarkerShown: false
+    bookingDropOff: ""
   }
 
   componentDidMount() {

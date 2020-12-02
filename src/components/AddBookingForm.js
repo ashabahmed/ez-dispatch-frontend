@@ -23,8 +23,8 @@ class AddBookingForm extends React.Component {
   }
 
   accountNameOptions = () => {
-    let fakeObj = {name: " "}
-    let newArray = [fakeObj, ...this.props.accounts]
+
+    let newArray = [...this.props.accounts]
     return newArray.map((account) => (<option key={account.id} value={account.id}>{account.name}</option>))
   }
 
@@ -45,9 +45,11 @@ class AddBookingForm extends React.Component {
 
 
   render() {
-    console.log(this.state.date)
     return (
-    <div style={{textAlign: "center"}} className="form-wrapper">
+      <>
+        <div className='modal-mask' onClick={() => {this.props.closePopUp()}}>
+        </div> 
+        <div style={{textAlign: "center"}} className="modal-thing">
         <h1>Add Booking Form</h1>
           <form onSubmit={this.handleSubmit} >
             <label>
@@ -87,7 +89,8 @@ class AddBookingForm extends React.Component {
           <br/> <br/>
           
           <button onClick={this.clickHandler}>BACK</button>
-    </div>
+      </div>
+    </>
     )
   }
 }
