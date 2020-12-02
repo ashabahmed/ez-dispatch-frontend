@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Map, GoogleApiWrapper, Marker  } from 'google-maps-react';
+import { GoogleApiWrapper, Marker, Map } from "google-maps-react"
+
 
 const mapStyles = {
-  width: '50%',
+  width: '70%',
   height: '50%'
 };
 
@@ -15,27 +16,34 @@ class Demo1 extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      <div>
+    <div>
         <Map
           google={this.props.google}
-          zoom={14}
+          zoom={10}
           style={mapStyles}
           initialCenter={{
-            lat: 50,
-            lng: 50
+            lat: this.props.pickUpLat,
+            lng: this.props.pickUpLong
           }}
         >
         <Marker
           onClick={this.onMarkerClick}
-          name={'This is test name'}
+          name={'pick up test'}
+          position={{lat: this.props.pickUpLat, lng: this.props.pickUpLong}} 
         />
+        <Marker />
+        <Marker
+          name={'drop off test'}
+          position={{lat: this.props.dropOffLat, lng: this.props.dropOffLong}} />
+        <Marker />
         </Map>
-      </div>
+    </div>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: ''
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY
 })(Demo1);

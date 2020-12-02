@@ -52,10 +52,6 @@ class EditBookingForm extends React.Component {
     return newArray.map((account) => (<option key={account.id} value={account.id}>{account.name}</option>))
   }
 
-  clickHandler = () => {
-    this.props.routerProps.history.push('/dispatch-grid')
-  }
-
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -64,7 +60,7 @@ class EditBookingForm extends React.Component {
     console.log("submitting")
     e.preventDefault();
     this.props.editBooking(this.state)
-    this.props.routerProps.history.push('/dispatch-grid')
+    this.props.closePopUp()
   }
 
 
@@ -107,11 +103,9 @@ class EditBookingForm extends React.Component {
             Internal Notes:  
             <textarea rows="5" cols="28" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
             <br/> <br/>
-            <button>Edit Booking</button>
+            <button>Update Booking</button>
           </form>
           <br/> <br/>
-        
-          <button onClick={this.clickHandler}>BACK</button>
         </div>
         </>
     

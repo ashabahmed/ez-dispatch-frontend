@@ -6,10 +6,10 @@ import { fetchBookingsAction, fetchDriversAction, fetchDispatchersAction, fetchV
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import NavBar from './components/NavBar'
 import BookingDetailPage from './components/BookingDetailPage'
-
 import Login from './components/Login'
 import AddBookingForm from './components/AddBookingForm'
-import EditBookingForm from './components/EditBookingForm'
+
+// let API_KEY = 
 
 class App extends React.Component {
   
@@ -24,9 +24,6 @@ class App extends React.Component {
     this.props.getVehicles()
   }
 
-  changeTime = (rubyTime) => {
-
-  }
 
   dayChangeHandler = (dayNumber) => {
     if(dayNumber === 1 || dayNumber === -1) {
@@ -38,13 +35,13 @@ class App extends React.Component {
 
 
   render () {
+    console.log(process.env.REACT_APP_GOOGLE_API_KEY)
     return (
       <>
       <BrowserRouter>
         <NavBar />
         <Switch>
-          <Route path='/bookings/:id' render={ routerProps =>  <BookingDetailPage routerProps={routerProps}/> } />  
-          <Route path='/edit-booking/:id' render={ routerProps =>  <EditBookingForm routerProps={routerProps}/> } />  
+          <Route path='/bookings/:id' render={ routerProps =>  <BookingDetailPage routerProps={routerProps}/> } />   
           <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />
           <Route path='/dispatch-grid' render={ routerProps =>  <Header dayChangeHandler={this.dayChangeHandler } currentDate={this.state.currentDate} routerProps={routerProps}/> } />
           <Route path='/' render={ routerProps =>  <Login routerProps={routerProps}/> } />
