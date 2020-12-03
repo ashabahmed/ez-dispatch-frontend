@@ -226,12 +226,11 @@ class BookingRow extends React.Component {
             <span>{ this.props.booking.drop_off_time ? (new Date(this.props.booking.drop_off_time).toTimeString()).slice(0, 5): "-- --" }</span>
           </td>
           <td>
-            <div>🗒</div>
+            <div title={this.props.booking.special_notes}>{ this.props.booking.special_notes === "" ? null : "🗒"} </div>
           </td>
           <td>
             <button className="button1" onClick={this.editBookingClick} >Edit/View</button>
           </td>
-  
         </tr>
       </Fragment>
     )

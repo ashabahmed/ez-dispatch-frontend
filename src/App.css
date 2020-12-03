@@ -1,17 +1,12 @@
-/* .form-wrapper {
-  border-radius: 5px;
-  background-color: rgb(200, 160, 74);
-  padding: 20px;
-  width: 300px;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
+
 
 button { 
-  cursor: pointer
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+input {
+  border-radius: 5px;
 }
 
 .button1 {
@@ -19,12 +14,12 @@ button {
   padding:0.35em 1.2em;
   border:0.1em solid #020202;
   margin:0 0.3em 0.3em 0;
-  border-radius: 0.12em;
+  border-radius: 5px;
   box-sizing: border-box;
   text-decoration:none;
   font-family:'Roboto',sans-serif;
   font-weight:300;
-  color:#2c2b2b;
+  color:#1d1c1c;
   text-align:center;
   transition: all 0.2s;
 }
@@ -62,8 +57,18 @@ body {
 }
 
 .editBookingForm label {
-  width: 25%;
-  text-align: left;
+  display: block;
+}
+
+.editBookingForm input{
+  padding: 5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.editBookingForm select{
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 
@@ -80,6 +85,25 @@ body {
 }
 
 .modal-thing {
+  background-color: #cacaca;
+  color: black;
+  width: 40%;
+  /* height: 1000px; */
+  position: absolute;
+  padding: 0% 0%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 20px;
+  float: left;
+
+}
+
+.view-modal-thing {
   background-color: #cacaca;
   color: black;
   width: 60%;
@@ -158,11 +182,6 @@ table {
   text-decoration: line-through;
 }
 
-.searchBar{
-  font-size: 1.5em; 
-  line-height: 1.5em;
-  width: 25%;
-}
 
 .logoImage{
   width: 100px;
@@ -177,7 +196,6 @@ th {
 
 th, td {
   text-align: center;
-  
   border-bottom: 2px solid black;
   border-left: 2px solid black;
   border-right: 2px solid black;
@@ -200,16 +218,92 @@ th, td {
 }
 
 thead {
-  /* display: block; */
   margin-top: 20px solid black;
 }
 
-/* tbody{
-  display:block;
-  height:90%;
+select {
+  width: 100%;
+  max-width: 200px;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+
+.loginForm {
+  padding:10px;
+  border-radius:10px;
   width:100%;
-  overflow-y: auto;
-} */
+  font-family:inherit;
+  font-size: inherit;
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+
+  position: absolute;
+  top: 35%;
+  left: 50%;
+
+  margin: -70px 0 0 -170px;  
+
+}
 
 
+.loginForm input[type=text] {
+  padding:10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
 
+.loginFormDiv {
+
+  position: relative;
+}
+
+.gridFilter {
+  margin-right: 10%;
+  border-radius: 5px;
+  grid-column: 3/4;
+  grid-row: 1/2;
+  justify-self: center;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.searchBar {
+  font-size: 1.4em; 
+  line-height: 1em;
+  width: 100%;
+  justify-self: center;
+}
+
+.searchAndFilterDiv{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+.searchDiv {
+  grid-column: 2/3;
+  grid-row: 1/2
+}
+
+.createForm label{
+  display: block;
+}
+
+.createForm input{
+  padding: 5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.createForm select{
+  width: 100%;
+  padding: 5px;
+  border-radius:10px;
+}

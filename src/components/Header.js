@@ -17,12 +17,12 @@ class Header extends React.Component {
 
     return (
       <div>
+        <div><h1 style={{textAlign: "center"}} >GRID: {this.props.currentDate.toDateString()} </h1></div>
+        
         <div style={{textAlign: "center"}}>
-          <hr/>
-          <button style={{float: "right"}} className="button1" onClick={this.addBookingClick} >Add Booking</button>
-
+          <button style={{textAlign: "center"}} className="button1" onClick={this.addBookingClick} >Add Booking</button>
         </div>
-        <div><h3 style={{textAlign: "center"}} >Viewing: {this.props.currentDate.toDateString()} </h3></div>
+      
         <hr/>
         <>
           <DispatchGrid routerProps={this.props.routerProps} currentDate={this.props.currentDate}/>

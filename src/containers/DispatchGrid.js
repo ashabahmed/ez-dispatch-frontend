@@ -65,13 +65,12 @@ class DispatchGrid extends React.Component {
   }
 
   render(){
-    console.log(this.mainBookingsRender().length)
     return(
       <>
-        <div style={{ textAlign: "center" }}>
-          <label >
-            <strong title='birch ass'>Filter:</strong>
-            <select value={this.state.filtered} onChange={(e)=>this.updateFilter(e.target.value)}>
+        <div className='searchAndFilterDiv'>
+          <div className="gridFilter" >
+            <label style={{display: "inline"}} htmlFor="filter">Filter:</label>
+            <select style={{display: "inline"}} id="filter" value={this.state.filtered} onChange={(e)=>this.updateFilter(e.target.value)}>
               <option value="Booked">Booked</option>
               <option value="Dropped">Dropped</option>
               <option value="Cancelled">Cancelled</option>
@@ -80,15 +79,15 @@ class DispatchGrid extends React.Component {
               <option value="No Show">No Show</option>
               <option value="All">All</option>
             </select>
-          </label>
-          <div>
+          </div>
+          <div className="searchDiv" style={{ textAlign: "center"}}>
             <input placeholder="Search Booking" className="searchBar" value={this.state.searchValue} onChange={this.searchHandler}/>
           </div>
         </div>  
         <hr/>
         <div className="dispatchGrid" >
           <table style={{textAlign: "center"}}>
-            <thead title='birch ass' style={{textAlign: "center"}} className="sticky-column">
+            <thead style={{textAlign: "center"}} className="sticky-column">
             <tr>
               <th className="sticky-column">Booking No.
               </th>

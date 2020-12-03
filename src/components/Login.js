@@ -29,16 +29,19 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div style={{textAlign: "center"}} className="form-wrapper">
+      <div style={{textAlign: "center"}} >
         <hr/><br/><br/><br/>
-        <form>
-          <label className="username" >Username</label>
+        <div lassName="loginFormDiv">
+        <form className="loginForm">
+          <label  > <h2>Username</h2> </label>
             <input value={this.state.username} name="username" type="text" placeholder="username" onChange={this.handleChange}></input>
             <br/><br/><br/>
-          <label className="password">Password</label>
-            <input value={this.state.password} name="password" type="password" placeholder="password" onChange={this.handleChange}></input>
-          <button onClick={this.clickHandler}>Login</button>
+          <label ><h2>Password</h2> </label> 
+            <input value={this.state.password} name="password" type="text" placeholder="password" onChange={this.handleChange}></input>
+            <br/><br/><br/>
+          <button className="button1" onClick={this.clickHandler}>Login</button>
         </form>
+        </div>
       </div>
     )
   }

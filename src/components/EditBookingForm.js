@@ -47,6 +47,7 @@ class EditBookingForm extends React.Component {
     this.props.getAccounts()
   }
 
+  
   accountNameOptions = () => {
     let newArray = [...this.props.accounts]
     return newArray.map((account) => (<option key={account.id} value={account.id}>{account.name}</option>))
@@ -71,38 +72,37 @@ class EditBookingForm extends React.Component {
         <div style={{textAlign: "center"}} className="modal-thing">
           <h1>Edit Booking Number {this.props.booking.id}</h1>
           <form className="editBookingForm" onSubmit={this.handleSubmit} >
-            <label>
-              Select Account:
+            
+          <label> Select Account</label>
               <select value={this.state.account} onChange={this.handleChange} name="account">
                 {this.accountNameOptions()}
               </select>
-            </label>
             <br/> <br/>
-            Scheduled Pick-up: 
+            <label>Scheduled Pick-up</label> 
             <input type="datetime-local" value={this.state.date} name='date' onChange={this.handleChange}/>
             <br/> <br/>
-            Passengers: 
+            <label>Passengers</label> 
             <input type="text" value={this.state.passenger_name} name='passenger_name' onChange={this.handleChange}/>
             <br/> <br/>
-            Passengers Cell Number: 
+            <label>Passengers Cell Number</label> 
             <input type="text" value={this.state.passenger_number} name='passenger_number' onChange={this.handleChange}/>
             <br/> <br/>
-            Vehicle Type:  
+            <label>Vehicle Type</label>  
             <input type="text" value={this.state.vehicle_type} name='vehicle_type' onChange={this.handleChange}/>
             <br/> <br/>
-            Pick Up Address:  
+            <label>Pick Up Address</label>  
             <input type="text" value={this.state.pick_up_address} name='pick_up_address' onChange={this.handleChange}/>
             <br/> <br/>
-            Drop Off Address:  
+            <label>Drop Off Address</label> 
             <input type="text" value={this.state.drop_off_address} name='drop_off_address' onChange={this.handleChange}/>
             <br/> <br/>
-            Special Notes:  
-            <textarea rows="5" cols="28" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
+            <label>Special Notes</label>  
+            <textarea rows="4" cols="28" value={this.state.special_notes} name='special_notes' onChange={this.handleChange}/>
             <br/> <br/>
-            Internal Notes:  
-            <textarea rows="5" cols="28" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
+            <label>Internal Notes</label> 
+            <textarea rows="4" cols="28" value={this.state.internal_notes} name='internal_notes' onChange={this.handleChange}/>
             <br/> <br/>
-            <button>Update Booking</button>
+            <button className="button1">Update Booking</button>
           </form>
           <br/> <br/>
         </div>

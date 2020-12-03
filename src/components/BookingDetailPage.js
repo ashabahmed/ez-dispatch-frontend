@@ -124,31 +124,52 @@ class BookingDetailPage extends React.Component {
 
     } else {
       let booking = this.props.booking
+      // let bookingStringTime = new Date(this.props.booking.booking_datetime)
       return(
         <>
           <div className='modal-mask' onClick={() => {this.props.detailClosePopUp()}}>
           </div> 
-          <div className="modal-thing columns">
+          <div className="view-modal-thing columns">
             <h1 className="detailHeader">Details for Booking No.{booking.id}</h1>
-            <h3>{booking.date.toString()}</h3>
-            <h3>{booking.booking_datetime.toString()}</h3>
+            {/* <div className="leftSide"><h4> Date: {booking.date.toString()}</h4></div>
+            <div className="rightSide"><h4> Time: {bookingStringTime.toTimeString().slice(0, 5)}</h4></div> */}
             <div className="leftSide">
-              <h3 >Pick Up Address: {booking.pick_up_address}</h3>
+              <h4 >Pick Up Address: {booking.pick_up_address}</h4>
             </div>
             <div className="rightSide">
-              <h3>Drop Off Address: {booking.drop_off_address}</h3>
+              <h4>Drop Off Address: {booking.drop_off_address}</h4>
             </div>
-            <button onClick={this.apiOnClick}>Load Map</button>
+            <div className="leftSide">
+              <h4>Passenger Name: {booking.passenger_name}</h4>
+            </div>
+            <div className="rightSide">
+              <h4>Passenger Number: {booking.passenger_number}</h4>
+            </div>
+            <div className="leftSide">
+              <h4>Booked By: {booking.dispatcher.name}</h4>
+            </div>
+            <div className="rightSide">
+              <h4>Dispatcher ID: {booking.dispatcher.id}</h4>
+            </div>
+            <div className="leftSide">
+              <h4>Driver Name: {booking.driver ? booking.driver.name : ""}</h4>
+            </div>
+            <div className="rightSide">
+              <h4>Driver Number: {booking.driver ? booking.driver.cell_number : ""}</h4>
+            </div>
+
             <div></div> 
-            <h4>
+            <p>
               { booking.location_point && `Distance: ${booking.location_point.distance}
               Duration: ${booking.location_point.duration}`}
-            </h4> 
+            </p> 
+            <div></div>
             <div></div>
             <div className='modalMap' style={{marginBottom: '300px'}}>
               {booking.location_point && <Demo1 booking={booking} pickUpLat={booking.location_point.pick_up_latitude}  
               pickUpLong={booking.location_point.pick_up_longitude} dropOffLat={booking.location_point.drop_off_latitude} dropOffLong={booking.location_point.drop_off_longitude}/>}
             </div>
+            <button onClick={this.apiOnClick}>Load Map</button>
           </div>
         </> 
       )
