@@ -70,7 +70,7 @@ class DispatchGrid extends React.Component {
       <>
         <div style={{ textAlign: "center" }}>
           <label >
-            <strong>Filter:</strong>
+            <strong title='birch ass'>Filter:</strong>
             <select value={this.state.filtered} onChange={(e)=>this.updateFilter(e.target.value)}>
               <option value="Booked">Booked</option>
               <option value="Dropped">Dropped</option>
@@ -88,7 +88,7 @@ class DispatchGrid extends React.Component {
         <hr/>
         <div className="dispatchGrid" >
           <table style={{textAlign: "center"}}>
-            <thead style={{textAlign: "center"}} className="sticky-column">
+            <thead title='birch ass' style={{textAlign: "center"}} className="sticky-column">
             <tr>
               <th className="sticky-column">Booking No.
               </th>

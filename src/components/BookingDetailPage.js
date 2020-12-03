@@ -116,7 +116,7 @@ class BookingDetailPage extends React.Component {
     if (this.props.booking === undefined) {
       return (
         <>
-          <div className='modal-mask' onClick={() => {this.props.detailClosePopUp()}}>
+          <div className='modal-mask' onClick={() => {this.props.detailClosePopUp()}} >
           </div> 
           <h1>LOADING</h1>
         </>
@@ -139,11 +139,13 @@ class BookingDetailPage extends React.Component {
               <h3>Drop Off Address: {booking.drop_off_address}</h3>
             </div>
             <button onClick={this.apiOnClick}>Load Map</button>
+            <div></div> 
             <h4>
               { booking.location_point && `Distance: ${booking.location_point.distance}
               Duration: ${booking.location_point.duration}`}
             </h4> 
-            <div className="modal-thing columns">
+            <div></div>
+            <div className='modalMap' style={{marginBottom: '300px'}}>
               {booking.location_point && <Demo1 booking={booking} pickUpLat={booking.location_point.pick_up_latitude}  
               pickUpLong={booking.location_point.pick_up_longitude} dropOffLat={booking.location_point.drop_off_latitude} dropOffLong={booking.location_point.drop_off_longitude}/>}
             </div>

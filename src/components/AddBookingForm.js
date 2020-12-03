@@ -37,7 +37,6 @@ class AddBookingForm extends React.Component {
   }
 
   handleSubmit = (e) => {
-    console.log("submitting")
     e.preventDefault();
     this.props.submitHandler(this.state)
     this.props.routerProps.history.push('/dispatch-grid')
@@ -47,7 +46,7 @@ class AddBookingForm extends React.Component {
   render() {
     return (
       <>
-        <div className='modal-mask' onClick={() => {this.props.closePopUp()}}>
+        <div className='modal-mask'>
         </div> 
         <div style={{textAlign: "center"}} className="modal-thing">
         <h1>Add Booking Form</h1>

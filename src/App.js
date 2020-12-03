@@ -4,7 +4,7 @@ import Header from './components/Header'
 import { connect } from 'react-redux'
 import { fetchBookingsAction, fetchDriversAction, fetchDispatchersAction, fetchVehiclesAction } from './redux/actions'
 import { BrowserRouter, Route, Switch } from "react-router-dom"
-
+import Logo from './components/Logo'
 import Login from './components/Login'
 import AddBookingForm from './components/AddBookingForm'
 
@@ -36,6 +36,7 @@ class App extends React.Component {
     
     return (
       <>
+      <Logo/>
       <BrowserRouter>
         <Switch> 
           <Route path='/add-booking' render={ routerProps =>  <AddBookingForm routerProps={routerProps}/> } />

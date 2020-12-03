@@ -18,10 +18,7 @@ class Header extends React.Component {
     return (
       <div>
         <div style={{textAlign: "center"}}>
-          <h1 >EzDispatch</h1>
           <hr/>
-
-          <button style={{textAlign: "center"}} className="button1" onClick={() => {this.handleClick()}}>Today</button>
           <button style={{float: "right"}} className="button1" onClick={this.addBookingClick} >Add Booking</button>
 
         </div>
@@ -32,6 +29,7 @@ class Header extends React.Component {
         </>
         <div style={{textAlign: "center"}}>
           <button className="button1" onClick={() => {this.handleClick(-1)}}>Previous Day</button>
+          <button style={{textAlign: "center"}} className="button1" onClick={() => {this.handleClick()}}>Today</button>
           <button  className="button1" onClick={() => {this.handleClick(+1)}}>Next Day</button>
         </div>
     </div>
